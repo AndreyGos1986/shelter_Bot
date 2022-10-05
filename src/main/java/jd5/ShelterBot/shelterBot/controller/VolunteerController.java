@@ -1,7 +1,7 @@
 package jd5.ShelterBot.shelterBot.controller;
 
-import jd5.ShelterBot.shelterBot.model.CallVolunteer;
-import jd5.ShelterBot.shelterBot.service.VolunteerService;
+import jd5.ShelterBot.shelterBot.model.VolunteerCalling;
+import jd5.ShelterBot.shelterBot.service.VolunteerCallingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,20 +10,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/volunteer")
 public class VolunteerController {
 
-    private final VolunteerService volunteerService;
+    private final VolunteerCallingService volunteerCallingService;
 
-    public VolunteerController(VolunteerService volunteerService) {
-        this.volunteerService = volunteerService;
+    public VolunteerController(VolunteerCallingService volunteerCallingService) {
+        this.volunteerCallingService = volunteerCallingService;
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CallVolunteer> readCallVolunteer(@PathVariable("id") Long id) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(volunteerService.readCallVolunteer(id));
+    public ResponseEntity<VolunteerCalling> readCallVolunteer(@PathVariable("id") Long id) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(volunteerCallingService.readVolunteerCalling(id));
     }
 
     @PostMapping
-    public ResponseEntity<CallVolunteer> createCallVolunteer(@RequestBody CallVolunteer callVolunteer) {
+    public ResponseEntity<VolunteerCalling> createCallVolunteer(@RequestBody VolunteerCalling volunteerCalling) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(volunteerService.createCallVolunteer(callVolunteer));
+                .body(volunteerCallingService.createVolunteerCalling(volunteerCalling));
     }
 }
