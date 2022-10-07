@@ -17,7 +17,7 @@ public class VolunteerCalling {
     private Long userId;
     private String cause;
     private ReportStatus status = ReportStatus.NEW;
-    private ShelterType type;
+    private UserType type;
     private LocalDate date;
 
     public Long getUserId() {
@@ -28,11 +28,11 @@ public class VolunteerCalling {
         this.userId = userId;
     }
 
-    public ShelterType getType() {
+    public UserType getType() {
         return type;
     }
 
-    public void setType(ShelterType type) {
+    public void setType(UserType type) {
         this.type = type;
     }
 
