@@ -5,6 +5,9 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Класс Волонтёр
+ */
 @Entity
 public class Volunteer {
     @Id
@@ -12,7 +15,9 @@ public class Volunteer {
     private Long id;
     private String firstname;
     private String surname;
-    private VolunteerSpecialization specialization;
+    private VolunteerSpecialization specialization; //Устанавливается из перечисления VolunteerSpecialization по типу животного,
+                                                    //либо ставится по умолчанию, когда пользователю надо
+                                                    //"просто спросить"
 
     @OneToMany (mappedBy = "volunteer")
     private List<Pet> pet;

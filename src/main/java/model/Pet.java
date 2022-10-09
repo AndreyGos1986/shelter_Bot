@@ -2,17 +2,20 @@ package model;
 
 import javax.persistence.*;
 import java.util.Objects;
+/**
+ * Класс животное
+ */
 @Entity
 public class Pet {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private  Long id;
-    private String nickName;
-    private int age;
-    private String ration;
-    private String behavior;
-    private String health;
-    private PetType type;
+    private  Long id; //идентификатор
+    private String nickName; // кличка
+    private int age; // возраст
+    private String ration; //рацион
+    private String behavior; //поведение
+    private String health; // состояние здоровья
+    private PetType type; // вид животного (выбирается из перечисления)
     @ManyToOne
     @JoinColumn
     private Volunteer volunteer;

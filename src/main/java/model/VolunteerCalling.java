@@ -5,20 +5,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDate;
 
+/**
+ * Класс вызова волонтёра
+ */
 @Entity
 public class VolunteerCalling {
     @Id
     @GeneratedValue
-    private Long id;
+    private Long id; //идентификатор
     private String firstName;
     private String lastName;
-    private String phoneNumber;
-    private Long parentId;
-    private Long userId;
-    private String cause;
-    private ReportStatus status = ReportStatus.NEW;
-    private UserType type;
-    private LocalDate date;
+    private String phoneNumber; //телефон вызывающего
+    private Long parentId; //идентификатор усыновителя
+    private Long userId; //идентификатор пользователя (общего)
+    private String cause; //причина вызова
+    private ReportStatus status = ReportStatus.NEW; //статус
+    private UserType type; // тип вызывающего
+    private LocalDate date; // дата вызова
 
     public Long getUserId() {
         return userId;

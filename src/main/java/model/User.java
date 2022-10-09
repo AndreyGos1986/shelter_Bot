@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Objects;
 
+/**
+ * Класс пользователя общий
+ */
 @Entity
 public class User {
 
@@ -18,7 +21,7 @@ public class User {
     private long telegramId;
     private String firstName;
     private String lastName;
-    private UserType type;
+    private UserType type; //тип пользователя ставится из перечисления UserType
 
     public User() {
     }

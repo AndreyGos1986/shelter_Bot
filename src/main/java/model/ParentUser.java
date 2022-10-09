@@ -6,17 +6,20 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
 
+/**
+ * Класс усыновителя
+ */
 @Entity
 public class ParentUser {
 
     @Id
     @GeneratedValue
-    private Long id;
-    private Long UserId;
-    private String phoneNumber;
-    private LocalDateTime lastReportDate;
+    private Long id; // Идентификатор
+    private Long UserId; // общий идентификатор для
+    private String phoneNumber; // номер телефона
+    private LocalDateTime lastReportDate; // дата последнего доклада
     private LocalDateTime lastNotification;
-    private LocalDateTime probation;
+    private LocalDateTime probation; // испытательный срок
 
     @OneToOne // хотя тут под вопросом, т.к. питомцев можно приютить и несколько
     private Pet pet;
