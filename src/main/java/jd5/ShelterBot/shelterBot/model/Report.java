@@ -1,4 +1,4 @@
-package model;
+package jd5.ShelterBot.shelterBot.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

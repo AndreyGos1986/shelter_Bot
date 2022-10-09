@@ -1,4 +1,4 @@
-package model;
+package jd5.ShelterBot.shelterBot.model;
 
 /**
  * Перечисление статусов отчета (вновь созданные, в обработке,обработка завершена)

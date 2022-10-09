@@ -1,7 +1,7 @@
-package service;
+package jd5.ShelterBot.shelterBot.service;
 
-import model.Report;
-import model.ReportStatus;
+import jd5.ShelterBot.shelterBot.model.Report;
+import jd5.ShelterBot.shelterBot.model.ReportStatus;
 
 import java.time.LocalDate;
 import java.util.List;

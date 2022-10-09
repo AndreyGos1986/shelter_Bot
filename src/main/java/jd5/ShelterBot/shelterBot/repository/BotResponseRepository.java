@@ -1,6 +1,6 @@
-package repository;
+package jd5.ShelterBot.shelterBot.repository;
 
-import model.BotResponse;
+import jd5.ShelterBot.shelterBot.model.BotResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * Репозиторий, в котором хранятся ответы бота

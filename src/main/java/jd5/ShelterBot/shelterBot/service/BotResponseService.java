@@ -1,6 +1,6 @@
-package service;
+package jd5.ShelterBot.shelterBot.service;
 
-import model.BotResponse;
+import jd5.ShelterBot.shelterBot.model.BotResponse;
 
 /**
  * Сервис ответов бота

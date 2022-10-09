@@ -1,14 +1,14 @@
-package service.impl;
+package jd5.ShelterBot.shelterBot.service.impl;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.request.SendMessage;
+import jd5.ShelterBot.shelterBot.service.UserService;
 import model.ParentUser;
-import model.Report;
-import model.ReportStatus;
+import jd5.ShelterBot.shelterBot.model.Report;
+import jd5.ShelterBot.shelterBot.model.ReportStatus;
 import model.User;
-import repository.ReportRepository;
-import service.ReportService;
-import service.UserService;
+import jd5.ShelterBot.shelterBot.repository.ReportRepository;
+import jd5.ShelterBot.shelterBot.service.ReportService;
 
 import java.time.LocalDate;
 import java.util.List;
