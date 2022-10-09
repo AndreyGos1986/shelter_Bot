@@ -1,6 +1,6 @@
-package service;
+package jd5.ShelterBot.shelterBot.service;
 
-import model.Knowledge;
+import jd5.ShelterBot.shelterBot.model.Knowledge;
 
 import java.util.Collection;
 

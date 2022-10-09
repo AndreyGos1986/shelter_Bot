@@ -1,4 +1,4 @@
-package model;
+package jd5.ShelterBot.shelterBot.model;
 /**
  * Перечисление типов животных, находящихся в приюте
  */

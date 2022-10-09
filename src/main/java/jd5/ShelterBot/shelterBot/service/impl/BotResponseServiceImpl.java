@@ -1,11 +1,11 @@
-package service.impl;
+package jd5.ShelterBot.shelterBot.service.impl;
 
-import model.BotResponse;
+import jd5.ShelterBot.shelterBot.model.BotResponse;
+import jd5.ShelterBot.shelterBot.service.BotResponseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import repository.BotResponseRepository;
-import service.BotResponseService;
+import jd5.ShelterBot.shelterBot.repository.BotResponseRepository;
 
 @Service
 public class BotResponseServiceImpl implements BotResponseService {
