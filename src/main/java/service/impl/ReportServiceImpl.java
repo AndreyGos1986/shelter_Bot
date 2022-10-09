@@ -40,6 +40,12 @@ public class ReportServiceImpl implements ReportService {
         return report;
     }
 
+    /**
+     * Метод добавления нового отчёта
+     * @param data
+     * @param telegramId
+     * @param date
+     */
     @Override
     public void addPhoto(byte[] data, Long telegramId, LocalDate date) {
         Report report = getReport(telegramId, date);
@@ -48,6 +54,12 @@ public class ReportServiceImpl implements ReportService {
         repository.save(report);
     }
 
+    /**
+     * Метод добавления/указания рациона
+     * @param text
+     * @param telegramId
+     * @param date
+     */
     @Override
     public void addRation(String text, Long telegramId, LocalDate date) {
         Report report = getReport(telegramId, date);
@@ -56,6 +68,12 @@ public class ReportServiceImpl implements ReportService {
         repository.save(report);
     }
 
+    /**
+     * Метод для добавления/указания состояния здоровья
+     * @param text
+     * @param telegramId
+     * @param date
+     */
     @Override
     public void addHealth(String text, Long telegramId, LocalDate date) {
         Report report = getReport(telegramId, date);
@@ -64,6 +82,12 @@ public class ReportServiceImpl implements ReportService {
         repository.save(report);
     }
 
+    /**
+     * Метод добавления/указания поведения
+     * @param text
+     * @param telegramId
+     * @param date
+     */
     @Override
     public void addBehavior(String text, Long telegramId, LocalDate date) {
         Report report = getReport(telegramId, date);
@@ -72,17 +96,31 @@ public class ReportServiceImpl implements ReportService {
         repository.save(report);
     }
 
+    /**
+     * метод поиска отчёта по идентификатору
+     * @param reportId
+     * @return
+     */
     @Override
     public Report findReportById(long reportId) {
         Optional<Report> report = repository.findById(reportId);
         return report.orElse(null);
     }
 
+    /**
+     * Метод для вывода все отчетов
+     * @return
+     */
     @Override
     public List<Report> findAllReports() {
         return repository.findAll();
     }
 
+    /**
+     * Метод, выводящий все отчеты, имеющие определённый статус
+     * @param status
+     * @return
+     */
     @Override
     public List<Report> findReportsWithStatus(ReportStatus status) {
         List<Report> reports = repository.findAll();
@@ -90,6 +128,11 @@ public class ReportServiceImpl implements ReportService {
         return reports;
     }
 
+    /**
+     * Метод, проверяющий короректность направленного отчета
+     * @param r
+     * @return
+     */
     private boolean isWrongReport(Report r) {
         boolean hasPhoto = r.getPhoto() != null;
         boolean hasRation = r.getRation() != null;
@@ -99,6 +142,10 @@ public class ReportServiceImpl implements ReportService {
         return !hasPhoto || !hasRation || !hasHealth || !hasBehavior;
     }
 
+    /**
+     * Метод выводящий все некорректные отчеты
+     * @return
+     */
     @Override
     public List<Report> findWrongReports() {
         List<Report> reports = repository.findAll();
@@ -106,6 +153,11 @@ public class ReportServiceImpl implements ReportService {
         return reports;
     }
 
+    /**
+     * Метод, выводящий фотографию из определённого отчёта, полученного оп его идентификатору
+     * @param reportId
+     * @return
+     */
     @Override
     public byte[] getReportPhoto(Long reportId) {
         Optional<Report> report = repository.findById(reportId);
@@ -118,6 +170,11 @@ public class ReportServiceImpl implements ReportService {
         return new byte[0];
     }
 
+    /**
+     * Метод для отправки сообщения пользователю
+     * @param userId
+     * @param text
+     */
     @Override
     public void sendMessageToUser(Long userId, String text) {
        User user = userService.findUserById(userId);
@@ -125,11 +182,22 @@ public class ReportServiceImpl implements ReportService {
         telegramBot.execute(message);
     }
 
+    /**
+     * Метод проверяющий допустимость направления отчета усыновителем.
+     * @param telegramId
+     * @return
+     */
     @Override
     public boolean isReportingAllowed(Long telegramId) {
         return userService.findParentByTelegramId(telegramId) != null;
     }
 
+    /**
+     * Метод получения всех отчетов от одного усыновителя
+     * @param status
+     * @param parentId
+     * @return
+     */
     @Override
     public List<Report> findAllReportsByParentId(ReportStatus status, long parentId) {
         List<Report> reports = repository.findAllByParentId(parentId);
@@ -137,6 +205,12 @@ public class ReportServiceImpl implements ReportService {
         return reports;
     }
 
+    /**
+     * Метод изменения статуса отчета. Отчет находим по идентификатору и если найден, меняем
+     * @param reportId
+     * @param status
+     * @return
+     */
     @Override
     public Report setReportStatus(long reportId, ReportStatus status) {
         Report report = findReportById(reportId);
