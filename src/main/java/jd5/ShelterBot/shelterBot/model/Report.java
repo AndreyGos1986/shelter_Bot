@@ -7,21 +7,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDate;
 
+/**
+ * Класс доклад/отчет (который направляет усыновитель в течение испытательного срока)
+ */
 @Entity
 public class Report {
 
     @Id
     @GeneratedValue
-    private Long id;
-    private Long parentId;
+    private Long id; // идентификатор
+    private Long parentId; // идентификатор усыновителя
 
     @JsonIgnore
-    private byte[] photo;
-    private String ration;
-    private String health;
-    private String behavior;
-    private ReportStatus status = ReportStatus.NEW;
-    private LocalDate date;
+    private byte[] photo; //фото жиивотного
+    private String ration; //рацион
+    private String health; //состояние здоровья
+    private String behavior; // поведение
+    private ReportStatus status = ReportStatus.NEW; //статус доклада из перечисления
+    private LocalDate date;  //дата доклада
 
     public Report() {
     }

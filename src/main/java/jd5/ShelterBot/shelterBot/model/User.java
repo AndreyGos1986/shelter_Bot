@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Objects;
 
+/**
+ * Класс пользователя общий
+ */
 @Entity
 public class User {
 
@@ -18,7 +21,7 @@ public class User {
     private long telegramId;
     private String firstName;
     private String lastName;
-    private ShelterType type;
+    private UserType type; //тип пользователя ставится из перечисления UserType
 
     public User() {
     }
@@ -55,11 +58,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public ShelterType getType() {
+    public UserType getType() {
         return type;
     }
 
-    public void setType(ShelterType type) {
+    public void setType(UserType type) {
         this.type = type;
     }
 
