@@ -2,13 +2,14 @@ package jd5.ShelterBot.shelterBot.service.impl;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.request.SendMessage;
+import jd5.ShelterBot.shelterBot.model.ParentUser;
+import jd5.ShelterBot.shelterBot.model.ShelterUser;
 import jd5.ShelterBot.shelterBot.service.UserService;
-import model.ParentUser;
 import jd5.ShelterBot.shelterBot.model.Report;
 import jd5.ShelterBot.shelterBot.model.ReportStatus;
-import model.User;
 import jd5.ShelterBot.shelterBot.repository.ReportRepository;
 import jd5.ShelterBot.shelterBot.service.ReportService;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.Optional;
 /**
  * Имплементация сервиса ReportService
  */
+@Service
 public class ReportServiceImpl implements ReportService {
     private final ReportRepository repository;
     private final UserService userService;
@@ -177,7 +179,7 @@ public class ReportServiceImpl implements ReportService {
      */
     @Override
     public void sendMessageToUser(Long userId, String text) {
-       User user = userService.findUserById(userId);
+       ShelterUser user = userService.findUserById(userId);
         SendMessage message = new SendMessage(user.getTelegramId(), text);
         telegramBot.execute(message);
     }

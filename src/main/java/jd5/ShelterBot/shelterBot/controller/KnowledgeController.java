@@ -1,6 +1,8 @@
 package jd5.ShelterBot.shelterBot.controller;
 
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -25,18 +27,7 @@ public class KnowledgeController {
     public KnowledgeController(KnowledgeService service) {
         this.service = service;
     }
-    @ApiResponses({
-            @ApiResponse (
-                    responseCode = "200",
-                    description = "Найдена информация по идентификатору",
-                    content = @Content(
-                            mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema (implementation = Knowledge.class)
-            )
-            ),
-
-
-    })
+   @Operation (summary = "Получить информацию по идентификатору")
     @GetMapping("{idRead}")
     public ResponseEntity<Knowledge> getKnowledgeById(@PathVariable Long idRead) {
         Knowledge knowledgeGet = service.findKnowledgeById(idRead);
@@ -45,7 +36,16 @@ public class KnowledgeController {
         }
         return ResponseEntity.ok(knowledgeGet);
     }
-
+    @ApiResponses({
+            @ApiResponse (
+                    responseCode = "200",
+                    description = "Получить всю информацию",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            array = @ArraySchema(schema = @Schema (implementation = Knowledge.class))
+                    )
+            ),
+    })
     @GetMapping("all")
     public Collection<Knowledge> getAllKnowledge() {
         return service.findAllKnowledge();
