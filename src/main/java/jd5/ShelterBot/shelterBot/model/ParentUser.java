@@ -20,6 +20,7 @@ public class ParentUser {
     private Long id;
 
     private Long parentId;
+    private Long shelterUserId;
     private String name;
     private String surname;
     private String phoneNumber;
@@ -28,11 +29,12 @@ public class ParentUser {
     private LocalDate endOfProbation;
 
 
-    public ParentUser(Long parentId, String name, String surname, String phoneNumber) {
+    public ParentUser(Long parentId,Long shelterUserId, String name, String surname, String phoneNumber) {
         this.parentId = parentId;
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
+        this.shelterUserId=shelterUserId;
 //        Определиться сколько будет длиться испытательный срок
 //        endOfProbation = LocalDate.now() +
     }
@@ -103,6 +105,14 @@ public class ParentUser {
 
     public void setEndOfProbation(LocalDate endOfProbation) {
         this.endOfProbation = endOfProbation;
+    }
+
+    public Long getShelterUserId() {
+        return shelterUserId;
+    }
+
+    public void setShelterUserId(Long shelterUserId) {
+        this.shelterUserId = shelterUserId;
     }
 
     @Override

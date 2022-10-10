@@ -24,15 +24,25 @@ public class KnowledgeServiceImpl implements KnowledgeService {
 
     @Override
     public Knowledge addKnowledge(Knowledge newKnowledge) {
-        logger.info("Was invoked method for creating new knowledge");
+        logger.info("Запущен метод добавления/создания новой информации");
         return knowledgeRepository.save(newKnowledge);
     }
 
+    /**
+     * Метод поиска информации по идентификатору
+     * @param id
+     * @return
+     */
     @Override
     public Knowledge findKnowledgeById(Long id) {
         return knowledgeRepository.findById(id).get();
     }
 
+    /**
+     * получить ответ на вопрос
+     * @param questionToFind
+     * @return
+     */
     @Override
     public String findAnswerByQuestion(String questionToFind) {
         String foundAnswer = knowledgeRepository.findKnowledgeByQuestionContainingIgnoreCase(questionToFind).getAnswer();
@@ -45,11 +55,20 @@ public class KnowledgeServiceImpl implements KnowledgeService {
         return foundAnswer;
     }
 
+    /**
+     * Обновить информацию
+     * @param id
+     * @return
+     */
     @Override
     public Knowledge updateKnowledgeById(Long id) {
         return knowledgeRepository.findById(id).get();
     }
 
+    /**
+     * Удалить информацию
+     * @param id
+     */
     @Override
     public void deleteKnowledgeById(Long id) {
         knowledgeRepository.deleteById(id);
