@@ -1,7 +1,7 @@
-package jd5.ShelterBot.shelterBot.service.impl;
+package jd5.ShelterBot.shelterBot.model.service.impl;
 
 import jd5.ShelterBot.shelterBot.model.Knowledge;
-import jd5.ShelterBot.shelterBot.service.KnowledgeService;
+import jd5.ShelterBot.shelterBot.model.service.KnowledgeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

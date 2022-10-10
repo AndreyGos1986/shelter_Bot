@@ -1,4 +1,4 @@
-package jd5.ShelterBot.shelterBot.service;
+package jd5.ShelterBot.shelterBot.model.service;
 
 import jd5.ShelterBot.shelterBot.model.Report;
 import jd5.ShelterBot.shelterBot.model.ReportStatus;
@@ -35,5 +35,5 @@ public interface ReportService {
     List<Report> findAllReportsByParentId(ReportStatus status, long parentId); // поулчить все отчеты от одного усыновителя
 
     Report setReportStatus(long reportId, ReportStatus status); //изменить или установить статус отчету
-                                                                //из допустимых значений в перечислении ReportStatus
+    //из допустимых значений в перечислении ReportStatus
 }

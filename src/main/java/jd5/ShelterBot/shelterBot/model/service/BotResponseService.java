@@ -1,4 +1,4 @@
-package jd5.ShelterBot.shelterBot.service;
+package jd5.ShelterBot.shelterBot.model.service;
 
 import jd5.ShelterBot.shelterBot.model.BotResponse;
 

@@ -43,7 +43,7 @@ public class ShelterController implements UpdatesListener {
             // Получение фотографии от пользователя (не сжатое), как ее сохранить в базу надо будет подумать,
             // сам файл лежит на сервере телеги по адресу https://api.telegram.org/file/bot<token>/<file_path>
 
-            String photo = update.message().photo()[3].fileId();
+//            String photo = update.message().photo()[3].fileId();
 
 
 

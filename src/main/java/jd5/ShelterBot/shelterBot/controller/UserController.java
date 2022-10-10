@@ -2,7 +2,7 @@ package jd5.ShelterBot.shelterBot.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import jd5.ShelterBot.shelterBot.model.BotResponse;
-import jd5.ShelterBot.shelterBot.service.BotResponseService;
+import jd5.ShelterBot.shelterBot.model.service.BotResponseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,8 +24,9 @@ public class UserController {
     public ResponseEntity<String> welcome() {
         return ResponseEntity.ok("Привет!!!!");
     }
-@Operation(summary = "Получить ответ на запрос",
-tags = "")
+
+    @Operation(summary = "Получить ответ на запрос",
+            tags = "")
     @GetMapping("test/bot_response")
     public ResponseEntity<String> getResponseMessage(String message) {
         String response = botResponseService.getResponseMessage(message);
@@ -36,7 +37,7 @@ tags = "")
     }
 
     @Operation(summary = "Сохранить новое сообщение-ответ от бота",
-    tags = "Сохранить")
+            tags = "Сохранить")
     @PostMapping("test/bot_response")
     public ResponseEntity<BotResponse> getResponseMessage(String keyMessage, String responseMessage) {
         BotResponse response = botResponseService.saveResponseMessage(keyMessage, responseMessage);

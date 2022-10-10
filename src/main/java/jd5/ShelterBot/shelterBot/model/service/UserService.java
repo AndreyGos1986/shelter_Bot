@@ -1,4 +1,4 @@
-package jd5.ShelterBot.shelterBot.service;
+package jd5.ShelterBot.shelterBot.model.service;
 
 
 import jd5.ShelterBot.shelterBot.model.ParentUser;
@@ -26,7 +26,7 @@ public interface UserService {
     ParentUser saveParent(ParentUser parent); //сохранить усыновителя
 
     ParentUser registerAsParent(long userId, String phoneNumber); // регистрация пользователя в качестве
-                                                                    //усыновителя
+    //усыновителя
 
     List<ParentUser> findAllParents(); // вывести всех усыновителей
 

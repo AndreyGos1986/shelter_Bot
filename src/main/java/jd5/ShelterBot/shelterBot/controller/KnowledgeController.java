@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import jd5.ShelterBot.shelterBot.service.KnowledgeService;
+import jd5.ShelterBot.shelterBot.model.service.KnowledgeService;
 
 import java.util.Collection;
 
@@ -27,7 +27,8 @@ public class KnowledgeController {
     public KnowledgeController(KnowledgeService service) {
         this.service = service;
     }
-   @Operation (summary = "Получить информацию по идентификатору")
+
+    @Operation(summary = "Получить информацию по идентификатору")
     @GetMapping("{idRead}")
     public ResponseEntity<Knowledge> getKnowledgeById(@PathVariable Long idRead) {
         Knowledge knowledgeGet = service.findKnowledgeById(idRead);

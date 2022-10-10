@@ -1,0 +1,60 @@
+-- -- liquibase formatted sql
+--
+-- -- changeset golenevav:1
+--
+-- CREATE TABLE bot_response
+-- (
+--     id               SERIAL PRIMARY KEY,
+--     key_message      VARCHAR(255) NOT NULL,
+--     response_message VARCHAR(255) NOT NULL
+-- );
+--
+-- ALTER TABLE bot_response
+--     owner to "Alexey";
+--
+-- CREATE TABLE knowledge
+-- (
+--     id           BIGSERIAL PRIMARY KEY,
+--     code_id      VARCHAR(255) NOT NULL,
+--     question     VARCHAR(255) NOT NULL,
+--     answer       VARCHAR(255) NOT NULL,
+--     version      BIGINT       NOT NULL,
+--     has_answered BOOLEAN      NOT NULL,
+--     has_approved BOOLEAN      NOT NULL
+-- );
+--
+-- ALTER TABLE knowledge
+--     owner to "Alexey";
+--
+-- CREATE TABLE parent_user
+-- (
+--     id                        BIGSERIAL PRIMARY KEY,
+--     parent_id                 BIGINT       NOT NULL,
+--     shelter_user_id           BIGINT       NOT NULL,
+--     name                      VARCHAR(255) NOT NULL,
+--     surname                   VARCHAR(255) NOT NULL,
+--     phone_number              VARCHAR(255) NOT NULL,
+--     last_report_date          DATE         NOT NULL,
+--     last_notice_date_and_time TIMESTAMP    NOT NULL,
+--     end_of_probation          DATE         NOT NULL
+-- );
+--
+-- ALTER TABLE parent_user
+--     owner to "Alexey";
+--
+-- CREATE TABLE pet
+-- (
+--     id                        BIGSERIAL PRIMARY KEY,
+--     nick_name                 VARCHAR(255),
+--     age                       INT          NOT NULL,
+--     ration                      VARCHAR(255) NOT NULL,
+--     behavior                   VARCHAR(255) NOT NULL,
+--     health              VARCHAR(255) NOT NULL,
+--     type              VARCHAR(255) NOT NULL,
+--     last_report_date          DATE         NOT NULL,
+--     last_notice_date_and_time TIMESTAMP    NOT NULL,
+--     end_of_probation          DATE         NOT NULL
+-- );
+--
+-- ALTER TABLE pet
+--     owner to "Alexey";
