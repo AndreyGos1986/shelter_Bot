@@ -1,4 +1,4 @@
-package model;
+package jd5.ShelterBot.shelterBot.model;
 
 /**
  * Перечисление специализаций волонтёра в зависимости от типа животного

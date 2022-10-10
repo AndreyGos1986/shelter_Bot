@@ -1,4 +1,4 @@
-package model;
+package jd5.ShelterBot.shelterBot.model;
 
 import javax.persistence.*;
 import java.util.Objects;

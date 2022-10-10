@@ -20,15 +20,40 @@ public class ShelterUser {
     private Long telegramId;
     private String name;
     private String surname;
+    private UserType userType;
+    private ShelterType shelterType;
 
-    public ShelterUser(Long telegramId, String name, String surname) {
+    public ShelterUser(Long id,
+                       Long telegramId,
+                       String name,
+                       String surname,
+                       UserType userType,
+                       ShelterType shelterType) {
+        this.id = id;
         this.telegramId = telegramId;
         this.name = name;
         this.surname = surname;
+        this.userType = userType;
+        this.shelterType = shelterType;
     }
 
     public ShelterUser() {
+    }
 
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
+
+    public ShelterType getShelterType() {
+        return shelterType;
+    }
+
+    public void setShelterType(ShelterType shelterType) {
+        this.shelterType = shelterType;
     }
 
     public Long getId() {

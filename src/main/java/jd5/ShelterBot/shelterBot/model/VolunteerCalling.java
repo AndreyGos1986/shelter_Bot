@@ -1,4 +1,4 @@
-package model;
+package jd5.ShelterBot.shelterBot.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,11 +20,20 @@ public class VolunteerCalling {
     private Long userId; //идентификатор пользователя (общего)
     private String cause; //причина вызова
     private ReportStatus status = ReportStatus.NEW; //статус
-    private UserType type; // тип вызывающего
+    private UserType type; // тип вызывающего (новый пользователь, усыновитель)
+    private ShelterType shelterType; //вызывающий по типу животного (кошки, собаки, грузыну, попугаи)
     private LocalDate date; // дата вызова
 
     public Long getUserId() {
         return userId;
+    }
+
+    public ShelterType getShelterType() {
+        return shelterType;
+    }
+
+    public void setShelterType(ShelterType shelterType) {
+        this.shelterType = shelterType;
     }
 
     public void setUserId(Long userId) {
