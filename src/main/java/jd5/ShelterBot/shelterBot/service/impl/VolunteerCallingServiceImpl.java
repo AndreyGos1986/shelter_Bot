@@ -44,7 +44,7 @@ public class VolunteerCallingServiceImpl implements VolunteerCallingService {
         VolunteerCalling call = new VolunteerCalling();
         call.setDate(LocalDate.now());
         call.setType(user.getUserType());
-        call.setShelterType(user.getShelterType());
+        call.setShelterType(user.getType());
         call.setUserId(user.getId());
         call.setFirstName(user.getName());
         call.setLastName(user.getSurname());

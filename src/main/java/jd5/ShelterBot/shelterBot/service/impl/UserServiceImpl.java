@@ -4,7 +4,7 @@ import jd5.ShelterBot.shelterBot.model.ParentUser;
 import jd5.ShelterBot.shelterBot.model.ShelterType;
 import jd5.ShelterBot.shelterBot.model.ShelterUser;
 import jd5.ShelterBot.shelterBot.model.UserType;
-import jd5.ShelterBot.shelterBot.repository.ParentRepository;
+import jd5.ShelterBot.shelterBot.repository.ParentUserRepository;
 import jd5.ShelterBot.shelterBot.repository.UserRepository;
 import jd5.ShelterBot.shelterBot.service.UserService;
 import org.springframework.stereotype.Service;
@@ -15,9 +15,9 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final ParentRepository parentRepository;
+    private final ParentUserRepository parentRepository;
 
-    public UserServiceImpl(UserRepository repository, ParentRepository parentRepository) {
+    public UserServiceImpl(UserRepository repository, ParentUserRepository parentRepository) {
         this.userRepository = repository;
         this.parentRepository = parentRepository;
     }
@@ -50,8 +50,7 @@ public class UserServiceImpl implements UserService {
         if(user == null) {
             return null;
         }
-
-        return parentRepository.findByShelterUserId(user.getId());
+        return parentRepository.findParentUserByShelterUserId(user.getId());
     }
 
     @Override
@@ -69,7 +68,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ParentUser findParentByUserId(long id) {
-        return parentRepository.findByShelterUserId(id);
+        return parentRepository.findParentUserByShelterUserId(id);
     }
 
     @Override

@@ -4,8 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.PropertySource;
 
-//В папку resources надо добавить свой файл "custom.properties" и в нем прописать данные для базы и токен телеги, добавить его в гит игнор
-@PropertySource(value = "classpath:custom.properties", encoding = "UTF-8")
+//В папку resources надо добавить свой файл "custom.properties" и в нем прописать данные для базы, имя бота и токен телеги, добавить его в гит игнор
 @SpringBootApplication
 public class ShelterBotApplication {
 
