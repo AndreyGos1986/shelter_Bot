@@ -2,7 +2,7 @@ package jd5.ShelterBot.shelterBot.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import jd5.ShelterBot.shelterBot.model.BotResponse;
-import jd5.ShelterBot.shelterBot.model.service.BotResponseService;
+import jd5.ShelterBot.shelterBot.service.BotResponseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

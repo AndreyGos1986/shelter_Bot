@@ -1,4 +1,4 @@
-package jd5.ShelterBot.shelterBot.model.service.impl;
+package jd5.ShelterBot.shelterBot.service.impl;
 
 import jd5.ShelterBot.shelterBot.model.ParentUser;
 import jd5.ShelterBot.shelterBot.model.ShelterType;
@@ -6,7 +6,7 @@ import jd5.ShelterBot.shelterBot.model.ShelterUser;
 import jd5.ShelterBot.shelterBot.model.UserType;
 import jd5.ShelterBot.shelterBot.repository.ParentUserRepository;
 import jd5.ShelterBot.shelterBot.repository.UserRepository;
-import jd5.ShelterBot.shelterBot.model.service.UserService;
+import jd5.ShelterBot.shelterBot.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
