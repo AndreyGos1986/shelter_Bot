@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ParentUserRepository extends JpaRepository<ParentUser, Long> {
 
+    ParentUser findParentUserByShelterUserId(long id);
+
 }
