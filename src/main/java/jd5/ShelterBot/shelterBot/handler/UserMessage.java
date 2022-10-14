@@ -4,6 +4,7 @@ import com.pengrad.telegrambot.model.Contact;
 import com.pengrad.telegrambot.model.User;
 
 public class UserMessage {
+
     private User user;
     private String message;
     private long userId = -1;
@@ -18,6 +19,18 @@ public class UserMessage {
         this.user = user;
     }
 
+    public long getUserId() {
+        return userId;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
     public String getMessage() {
         return message;
     }
@@ -26,7 +39,7 @@ public class UserMessage {
         this.message = message;
     }
 
-    public long getUserId() {
+    public long getUserTelegramId() {
         return userId;
     }
 
@@ -42,11 +55,4 @@ public class UserMessage {
         this.picture = picture;
     }
 
-    public Contact getContact() {
-        return contact;
-    }
-
-    public void setContact(Contact contact) {
-        this.contact = contact;
-    }
 }
