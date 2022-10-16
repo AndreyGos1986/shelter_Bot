@@ -4,7 +4,7 @@ import jd5.ShelterBot.shelterBot.model.ParentUser;
 import jd5.ShelterBot.shelterBot.model.ShelterType;
 import jd5.ShelterBot.shelterBot.model.ShelterUser;
 import jd5.ShelterBot.shelterBot.model.UserType;
-import jd5.ShelterBot.shelterBot.repository.ParentRepository;
+import jd5.ShelterBot.shelterBot.repository.ParentUserRepository;
 import jd5.ShelterBot.shelterBot.repository.UserRepository;
 import jd5.ShelterBot.shelterBot.service.UserService;
 import org.springframework.stereotype.Service;
@@ -14,10 +14,11 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private final UserRepository userRepository;
-    private final ParentRepository parentRepository;
 
-    public UserServiceImpl(UserRepository repository, ParentRepository parentRepository) {
+    private final UserRepository userRepository;
+    private final ParentUserRepository parentRepository;
+
+    public UserServiceImpl(UserRepository repository, ParentUserRepository parentRepository) {
         this.userRepository = repository;
         this.parentRepository = parentRepository;
     }
@@ -30,7 +31,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public long findTelegramIdByParent(ParentUser parent) {
         ShelterUser user = findUserById(parent.getShelterUserId());
-        if(user == null) {
+        if (user == null) {
             return -1;
         }
 
@@ -47,7 +48,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ParentUser findParentByTelegramId(long telegramId) {
         ShelterUser user = userRepository.findUserByTelegramId(telegramId);
-        if(user == null) {
+        if (user == null) {
             return null;
         }
 
@@ -57,7 +58,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ParentUser registerAsParent(long userId, String phoneNumber) {
         Optional<ShelterUser> user = userRepository.findById(userId);
-        if(user.isEmpty()) {
+        if (user.isEmpty()) {
             return null;
         }
 
@@ -75,7 +76,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ShelterUser findUserByTelegramId(long id) {
         ShelterUser user = userRepository.findUserByTelegramId(id);
-        if(user == null) {
+        if (user == null) {
             user = new ShelterUser();
             user.setUserType(UserType.NEW_USER);
             user.setId(-1L);
@@ -86,7 +87,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<ShelterUser> findAllByType(ShelterType type) {
-        return userRepository.findAllByType(type);
+        return userRepository.findAllByShelterType(type);
     }
 
     @Override

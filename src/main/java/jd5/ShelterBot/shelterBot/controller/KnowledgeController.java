@@ -27,7 +27,8 @@ public class KnowledgeController {
     public KnowledgeController(KnowledgeService service) {
         this.service = service;
     }
-   @Operation (summary = "Получить информацию по идентификатору")
+
+    @Operation(summary = "Получить информацию по идентификатору")
     @GetMapping("{idRead}")
     public ResponseEntity<Knowledge> getKnowledgeById(@PathVariable Long idRead) {
         Knowledge knowledgeGet = service.findKnowledgeById(idRead);

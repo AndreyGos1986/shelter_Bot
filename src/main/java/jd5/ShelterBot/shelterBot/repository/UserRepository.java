@@ -10,6 +10,6 @@ public interface UserRepository extends JpaRepository <ShelterUser,Long> {
 
     ShelterUser findUserByTelegramId(long telegramId);
 
-    List<ShelterUser> findAllByType(ShelterType type);
+    List<ShelterUser> findAllByShelterType(ShelterType type);
 
 }

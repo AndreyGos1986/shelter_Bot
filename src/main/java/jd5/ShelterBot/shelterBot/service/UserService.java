@@ -26,7 +26,7 @@ public interface UserService {
     ParentUser saveParent(ParentUser parent); //сохранить усыновителя
 
     ParentUser registerAsParent(long userId, String phoneNumber); // регистрация пользователя в качестве
-                                                                    //усыновителя
+    //усыновителя
 
     List<ParentUser> findAllParents(); // вывести всех усыновителей
 
