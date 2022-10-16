@@ -55,4 +55,10 @@ public class UserMessage {
         this.picture = picture;
     }
 
+
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
 }
+

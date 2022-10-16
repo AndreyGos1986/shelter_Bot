@@ -10,16 +10,17 @@ import java.util.Objects;
  */
 @Entity
 public class Volunteer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstname;
     private String surname;
     private VolunteerSpecialization specialization; //Устанавливается из перечисления VolunteerSpecialization по типу животного,
-                                                    //либо ставится по умолчанию, когда пользователю надо
-                                                    //"просто спросить"
+    //либо ставится по умолчанию, когда пользователю надо
+    //"просто спросить"
 
-    @OneToMany (mappedBy = "volunteer")
+    @OneToMany(mappedBy = "volunteer")
     private List<Pet> pet;
 
     public Volunteer() {

@@ -4,11 +4,11 @@ import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.request.SendMessage;
 import jd5.ShelterBot.shelterBot.model.ParentUser;
 import jd5.ShelterBot.shelterBot.model.ShelterUser;
+import jd5.ShelterBot.shelterBot.service.ReportService;
 import jd5.ShelterBot.shelterBot.service.UserService;
 import jd5.ShelterBot.shelterBot.model.Report;
 import jd5.ShelterBot.shelterBot.model.ReportStatus;
 import jd5.ShelterBot.shelterBot.repository.ReportRepository;
-import jd5.ShelterBot.shelterBot.service.ReportService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -179,7 +179,7 @@ public class ReportServiceImpl implements ReportService {
      */
     @Override
     public void sendMessageToUser(Long userId, String text) {
-       ShelterUser user = userService.findUserById(userId);
+        ShelterUser user = userService.findUserById(userId);
         SendMessage message = new SendMessage(user.getTelegramId(), text);
         telegramBot.execute(message);
     }

@@ -10,6 +10,7 @@ import java.time.LocalDate;
  */
 @Entity
 public class VolunteerCalling {
+
     @Id
     @GeneratedValue
     private Long id; //идентификатор
