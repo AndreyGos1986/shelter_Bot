@@ -19,7 +19,7 @@ public class BotResponseServiceImpl implements BotResponseService {
     }
 
     public String getResponseMessage(String message) {
-        logger.info("Пробем получить ответ на вопрос \"" + message + "\"");
+        logger.info("Пробуем получить ответ на вопрос \"" + message + "\"");
 
         BotResponse response = responseRepositoryepository.findBotResponseByKeyMessage(message);
         if (response == null) {

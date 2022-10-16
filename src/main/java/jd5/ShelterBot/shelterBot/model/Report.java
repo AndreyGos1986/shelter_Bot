@@ -19,7 +19,7 @@ public class Report {
     private Long parentId; // идентификатор усыновителя
 
     @JsonIgnore
-    private byte[] photo; //фото жиивотного
+    private byte[] photo; //фото животного
     private String ration; //рацион
     private String health; //состояние здоровья
     private String behavior; // поведение

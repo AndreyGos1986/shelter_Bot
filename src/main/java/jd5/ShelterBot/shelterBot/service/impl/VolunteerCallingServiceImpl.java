@@ -3,9 +3,9 @@ package jd5.ShelterBot.shelterBot.service.impl;
 import com.pengrad.telegrambot.model.Contact;
 import jd5.ShelterBot.shelterBot.handler.UserMessage;
 import jd5.ShelterBot.shelterBot.model.*;
-import jd5.ShelterBot.shelterBot.repository.VolunteerCallingRepository;
 import jd5.ShelterBot.shelterBot.service.UserService;
 import jd5.ShelterBot.shelterBot.service.VolunteerCallingService;
+import jd5.ShelterBot.shelterBot.repository.VolunteerCallingRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
