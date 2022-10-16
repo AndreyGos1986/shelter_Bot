@@ -25,9 +25,9 @@ public class ParentUser {
     private String name;
     private String surname;
     private String phoneNumber;
-    private LocalDate lastReportDate;
+    private LocalDateTime lastReportDate;
     private LocalDateTime lastNoticeDateAndTime;
-    private LocalDate endOfProbation;
+    private LocalDateTime endOfProbation;
 
 
     public ParentUser(Long parentId,Long shelterUserId, String name, String surname, String phoneNumber) {
@@ -36,8 +36,7 @@ public class ParentUser {
         this.surname = surname;
         this.phoneNumber = phoneNumber;
         this.shelterUserId=shelterUserId;
-//        Определиться сколько будет длиться испытательный срок
-//        endOfProbation = LocalDate.now() +
+        this.endOfProbation=LocalDateTime.now().plusDays(30);
     }
 
     public ParentUser() {

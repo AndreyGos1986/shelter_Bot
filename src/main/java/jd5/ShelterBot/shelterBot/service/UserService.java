@@ -4,7 +4,7 @@ package jd5.ShelterBot.shelterBot.service;
 import jd5.ShelterBot.shelterBot.model.ParentUser;
 import jd5.ShelterBot.shelterBot.model.ShelterType;
 import jd5.ShelterBot.shelterBot.model.ShelterUser;
-import jd5.ShelterBot.shelterBot.model.UserType;
+
 
 import java.util.List;
 
