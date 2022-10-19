@@ -54,11 +54,4 @@ public class UserMessage {
     public void setPicture(byte[] picture) {
         this.picture = picture;
     }
-
-
-
-    public void setContact(Contact contact) {
-        this.contact = contact;
-    }
 }
-

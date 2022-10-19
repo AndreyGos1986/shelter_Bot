@@ -5,6 +5,7 @@ import com.pengrad.telegrambot.UpdatesListener;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.SendResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import jd5.ShelterBot.shelterBot.handler.MessageHandler;
 import jd5.ShelterBot.shelterBot.keyboards.ReplyKeyboardMaker;
 import org.slf4j.Logger;
@@ -32,7 +33,7 @@ public class ShelterController implements UpdatesListener {
     public void init() {
         telegramBot.setUpdatesListener(this);
     }
-
+    @Operation(summary = "Обработка команд")
     @Override
     public int process(List<Update> updates) {
         updates.forEach(update -> {
