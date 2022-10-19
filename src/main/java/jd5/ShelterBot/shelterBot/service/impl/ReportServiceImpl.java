@@ -30,6 +30,13 @@ public class ReportServiceImpl implements ReportService {
         this.telegramBot = telegramBot;
     }
 
+    /**
+     * Метод получения отчета, принимающий в параметры
+     * @param telegramId telegram идентификатор усыновителя
+     * @param date и дату отчета, после чего осуществляется поиск отчета по усыновителю и дате И
+     *            он пустой, создаётся новый отчёт, которому присваиваются идентификатор усыновителя и дата
+     * @return и возвращается этот отчёт
+     */
     private Report getReport(Long telegramId, LocalDate date) {
         ParentUser parent = userService.findParentByTelegramId(telegramId);
         Report report = repository.getReportByParentIdAndDate(parent.getId(), date);
@@ -43,10 +50,11 @@ public class ReportServiceImpl implements ReportService {
     }
 
     /**
-     * Метод добавления нового отчёта
-     * @param data
-     * @param telegramId
-     * @param date
+     * Метод добавления фотографии в новый отчет, принимающий в параметры
+     * @param data массив байт (фото)
+     * @param telegramId телеграмм идентификаторв
+     * @param date дату, после чего осуществляется поиск (получение отчета по идентификатору и дате),
+     *             к которому прикрепляется фото
      */
     @Override
     public void addPhoto(byte[] data, Long telegramId, LocalDate date) {
@@ -57,10 +65,11 @@ public class ReportServiceImpl implements ReportService {
     }
 
     /**
-     * Метод добавления/указания рациона
-     * @param text
-     * @param telegramId
-     * @param date
+     * Метод добавления/указания рациона в отчете
+     * @param text описание рациона
+     * @param telegramId телеграмм идентификатор
+     * @param date дату, после чего осуществляется поиск (получение отчета по идентификатору и дате) и
+     *             описание рациона сохраняется в полученном отчете
      */
     @Override
     public void addRation(String text, Long telegramId, LocalDate date) {
@@ -72,9 +81,10 @@ public class ReportServiceImpl implements ReportService {
 
     /**
      * Метод для добавления/указания состояния здоровья
-     * @param text
-     * @param telegramId
-     * @param date
+     * @param text описание состояния здоровья
+     * @param telegramId телеграмм идентификатор
+     * @param date дату, после чего осуществляется поиск (получение отчета по идентификатору и дате) и
+     *            описание состояния здоровья сохраняется в полученном отчете
      */
     @Override
     public void addHealth(String text, Long telegramId, LocalDate date) {
@@ -86,9 +96,10 @@ public class ReportServiceImpl implements ReportService {
 
     /**
      * Метод добавления/указания поведения
-     * @param text
-     * @param telegramId
-     * @param date
+     * @param text описание поведения
+     * @param telegramId телеграмм идентификатор
+     * @param date дату, после чего осуществляется поиск (получение отчета по идентификатору и дате) и
+     *            описание поведения сохраняется в полученном отчете
      */
     @Override
     public void addBehavior(String text, Long telegramId, LocalDate date) {
@@ -99,9 +110,9 @@ public class ReportServiceImpl implements ReportService {
     }
 
     /**
-     * метод поиска отчёта по идентификатору
-     * @param reportId
-     * @return
+     * Метод поиска отчёта по идентификатору, прнинимающий в параметры
+     * @param reportId идентификатор отчёта и
+     * @return возвращающий найденный отчет, либо null, если ничего не найдено
      */
     @Override
     public Report findReportById(long reportId) {
@@ -111,7 +122,7 @@ public class ReportServiceImpl implements ReportService {
 
     /**
      * Метод для вывода все отчетов
-     * @return
+     * @return возвращает все отчеты
      */
     @Override
     public List<Report> findAllReports() {
@@ -119,9 +130,9 @@ public class ReportServiceImpl implements ReportService {
     }
 
     /**
-     * Метод, выводящий все отчеты, имеющие определённый статус
-     * @param status
-     * @return
+     * Метод, выводящий все отчеты, имеющие определённый статус, принимающий в параметры
+     * @param status статус отчета
+     * @return выводящий список отчётов с указанным статусом
      */
     @Override
     public List<Report> findReportsWithStatus(ReportStatus status) {
@@ -131,8 +142,8 @@ public class ReportServiceImpl implements ReportService {
     }
 
     /**
-     * Метод, проверяющий короректность направленного отчета
-     * @param r
+     * Метод, проверяющий короректность направленного отчета, принимающий в параметры
+     * @param r отчет, осуществляет проверку на предмет того, все ли шаги выполнен
      * @return
      */
     private boolean isWrongReport(Report r) {
@@ -146,7 +157,7 @@ public class ReportServiceImpl implements ReportService {
 
     /**
      * Метод выводящий все некорректные отчеты
-     * @return
+     * @return возвращает список некорректных отчетов
      */
     @Override
     public List<Report> findWrongReports() {
@@ -157,8 +168,9 @@ public class ReportServiceImpl implements ReportService {
 
     /**
      * Метод, выводящий фотографию из определённого отчёта, полученного оп его идентификатору
-     * @param reportId
-     * @return
+     * @param reportId принимает в параметры идентификатор отчёта, проверяет, если отчёт есть,
+     *                 создаётся массив байт (фото), ссылающийся на фото из отчёта
+     * @return которое выводится
      */
     @Override
     public byte[] getReportPhoto(Long reportId) {
@@ -173,9 +185,10 @@ public class ReportServiceImpl implements ReportService {
     }
 
     /**
-     * Метод для отправки сообщения пользователю
-     * @param userId
-     * @param text
+     * Метод для отправки сообщения пользователю, принимающий
+     * @param userId идентификатор пользователя и
+     * @param text текст сообщения, после осуществляется поиск пользователя, создаётся сообщение из параметра
+     *             и отправляется
      */
     @Override
     public void sendMessageToUser(Long userId, String text) {
@@ -186,7 +199,7 @@ public class ReportServiceImpl implements ReportService {
 
     /**
      * Метод проверяющий допустимость направления отчета усыновителем.
-     * @param telegramId
+     * @param telegramId принимает в параметры телеграмм идентификатор усыновителя, если найден, то допускается.
      * @return
      */
     @Override
@@ -195,10 +208,10 @@ public class ReportServiceImpl implements ReportService {
     }
 
     /**
-     * Метод получения всех отчетов от одного усыновителя
-     * @param status
-     * @param parentId
-     * @return
+     * Метод получения всех отчетов от одного усыновителя с определённым статусом
+     * @param status принимается определённый статус и
+     * @param parentId идентификатор усыновителя
+     * @return возвращает список отчетов от одного усыновителя с определённым статусом
      */
     @Override
     public List<Report> findAllReportsByParentId(ReportStatus status, long parentId) {
@@ -208,10 +221,10 @@ public class ReportServiceImpl implements ReportService {
     }
 
     /**
-     * Метод изменения статуса отчета. Отчет находим по идентификатору и если найден, меняем
-     * @param reportId
-     * @param status
-     * @return
+     * Метод изменения статуса отчета. Принимает в параметры
+     * @param reportId идент-р отчета и
+     * @param status присваиваемый статус, после чего находится нужный отчет и ему присваивается статус
+     * @return возвращая найденный отчёт с измененным статусом
      */
     @Override
     public Report setReportStatus(long reportId, ReportStatus status) {

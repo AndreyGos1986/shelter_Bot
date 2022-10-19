@@ -21,7 +21,11 @@ public class KnowledgeServiceImpl implements KnowledgeService {
         this.knowledgeRepository = knowledgeRepository;
     }
 
-
+    /**
+     * Метод добавления новой информации, принимающий в параметры
+     * @param newKnowledge новую информацию, после чего
+     * @return возвращается результат - сохранение новой информации в указанном репозитории
+     */
     @Override
     public Knowledge addKnowledge(Knowledge newKnowledge) {
         logger.info("Запущен метод добавления/создания новой информации");
@@ -29,9 +33,9 @@ public class KnowledgeServiceImpl implements KnowledgeService {
     }
 
     /**
-     * Метод поиска информации по идентификатору
-     * @param id
-     * @return
+     * Метод поиска информации по идентификатору, принимающий в параметры
+     * @param id идентификатор и
+     * @return возвращающий найденную по идентификатору информацию
      */
     @Override
     public Knowledge findKnowledgeById(Long id) {
@@ -39,9 +43,9 @@ public class KnowledgeServiceImpl implements KnowledgeService {
     }
 
     /**
-     * получить ответ на вопрос
-     * @param questionToFind
-     * @return
+     * Метод выводящий ответ на вопрос, принимающий в параметры
+     * @param questionToFind вопрос, после чего через метод репозитория осуществляется поиск и
+     * @return и возвращающиий ответ
      */
     @Override
     public String findAnswerByQuestion(String questionToFind) {
@@ -55,30 +59,38 @@ public class KnowledgeServiceImpl implements KnowledgeService {
         return foundAnswer;
     }
 
-    /**
-     * Обновить информацию
-     * @param id
-     * @return
-     */
+
     @Override
     public Knowledge updateKnowledgeById(Long id) {
         return knowledgeRepository.findById(id).get();
     }
 
     /**
-     * Удалить информацию
-     * @param id
+     * Метод удаления информации по идентификатору, принимающий в параемтры
+     * @param id идентификатор удаляющий найденную информацию
      */
     @Override
     public void deleteKnowledgeById(Long id) {
         knowledgeRepository.deleteById(id);
     }
 
+    /**
+     * Метод, выводящий всю имеющуюся информацию
+     * @return возвращающий список, содержащий всю информацию
+     */
     @Override
     public Collection<Knowledge> findAllKnowledge() {
         return knowledgeRepository.findAll();
     }
 
+    /**
+     * Метод поиска всех ответов на все вопросы, в котором
+     * инициализируется список всех вопросов
+     * инициализируется список всех ответов
+     * после чего начинается цикл и все вопросы добавляются в список вопросов
+     * ответы - в список ответов
+     * @return
+     */
     @Override
     public Collection<String> findAllAnswersToAllQuestions() {
         List<String> allQuestionsById = new ArrayList<>();

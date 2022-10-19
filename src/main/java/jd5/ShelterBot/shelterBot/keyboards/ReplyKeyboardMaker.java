@@ -12,10 +12,18 @@ import java.util.List;
 public class ReplyKeyboardMaker {
 
     public ReplyKeyboardMarkup getMainMenuKeyboard(int keyboardNumber) {
-        ReplyKeyboardMarkup replyKeyboardMarkup1 = new ReplyKeyboardMarkup(
-                new KeyboardButton[]{new KeyboardButton(ButtonNameEnum.TELL_ABOUT_SHELTER.getButtonName()), new KeyboardButton(ButtonNameEnum.SHELTER_SCHEDULE_ADDRESS.getButtonName())},
-                new KeyboardButton[]{new KeyboardButton(ButtonNameEnum.RECOMMENDATIONS_ON_SAFETY.getButtonName()), new KeyboardButton(ButtonNameEnum.GET_AND_SAVE_CONTACT_INFO.getButtonName())},
-                new KeyboardButton[]{new KeyboardButton(ButtonNameEnum.BACK.getButtonName())});
+                ReplyKeyboardMarkup replyKeyboardMarkup1 = new ReplyKeyboardMarkup(
+                new KeyboardButton[]{new KeyboardButton(ButtonNameEnum.TELL_ABOUT_SHELTER.getButtonName()),
+                        new KeyboardButton(ButtonNameEnum.SHELTER_SCHEDULE_ADDRESS.getButtonName())},
+
+                new KeyboardButton[]{new KeyboardButton(ButtonNameEnum.RECOMMENDATIONS_ON_SAFETY.getButtonName()),
+                        new KeyboardButton(ButtonNameEnum.GET_AND_SAVE_CONTACT_INFO.getButtonName())},
+
+                new KeyboardButton[]{new KeyboardButton(ButtonNameEnum.SEND_THE_REPORT.getButtonName())},
+
+                new KeyboardButton[]{new KeyboardButton(ButtonNameEnum.BACK.getButtonName())}
+                );
+
 
         List<ReplyKeyboardMarkup> keyboard = new ArrayList<>();
         keyboard.add(replyKeyboardMarkup1);
