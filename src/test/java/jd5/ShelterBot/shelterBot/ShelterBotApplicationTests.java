@@ -3,11 +3,11 @@ package jd5.ShelterBot.shelterBot;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class ShelterBotApplicationTests {
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class  ShelterBotApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void contextLoads() throws Exception {
 	}
-
 }
+
