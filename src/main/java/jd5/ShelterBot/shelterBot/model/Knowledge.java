@@ -6,9 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Objects;
 
-/**
- * Класс знаний/информации, предоставляемой ботом
- */
 @Entity
 public class Knowledge {
     @Id
