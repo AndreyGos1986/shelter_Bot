@@ -1,39 +1,39 @@
 package jd5.ShelterBot.shelterBot.service.impl;
 
 import jd5.ShelterBot.shelterBot.model.BotResponse;
+import jd5.ShelterBot.shelterBot.repository.BotResponseRepository;
 import jd5.ShelterBot.shelterBot.service.BotResponseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import jd5.ShelterBot.shelterBot.repository.BotResponseRepository;
 
 @Service
 public class BotResponseServiceImpl implements BotResponseService {
 
     private final Logger logger = LoggerFactory.getLogger(BotResponseServiceImpl.class);
 
-    private final BotResponseRepository responseRepositoryepository;
+    private final BotResponseRepository shelterRepository;
 
     public BotResponseServiceImpl(BotResponseRepository shelterRepository) {
-        this.responseRepositoryepository = shelterRepository;
+        this.shelterRepository = shelterRepository;
     }
 
-    public String getResponseMessage(String message) {
-        logger.info("Пробем получить ответ на вопрос \"" + message + "\"");
+   public String getResponseMessage(String message) {
+        logger.info("Trying to get response by key \"" + message + "\"");
 
-        BotResponse response = responseRepositoryepository.findBotResponseByKeyMessage(message);
-        if (response == null) {
-            logger.info("Ответ не найден");
+        BotResponse response = shelterRepository.findBotResponseByKeyMessage(message);
+        if(response == null) {
+            logger.info("The response message is not found.");
             return null;
         }
 
-        logger.info("Ответ найден");
+        logger.info("The response message is found.");
         return response.getResponseMessage();
     }
 
     public BotResponse saveResponseMessage(String keyMessage, String responseMessage) {
-        logger.info(" сохраненяем ключ-запрос " + keyMessage + " и ответ " + responseMessage);
+        logger.info("Save key " + keyMessage + " with response " + responseMessage);
 
-        return responseRepositoryepository.save(new BotResponse(keyMessage, responseMessage));
+        return shelterRepository.save(new BotResponse(keyMessage, responseMessage));
     }
 }

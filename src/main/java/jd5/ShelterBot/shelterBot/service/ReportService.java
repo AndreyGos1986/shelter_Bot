@@ -1,39 +1,37 @@
 package jd5.ShelterBot.shelterBot.service;
 
+
 import jd5.ShelterBot.shelterBot.model.Report;
 import jd5.ShelterBot.shelterBot.model.ReportStatus;
 
 import java.time.LocalDate;
 import java.util.List;
 
-/**
- * Сервис доклада/отчета усыновителя
- */
 public interface ReportService {
-    void addPhoto(byte[] data, Long fromUser, LocalDate date); // добавить фото
 
-    void addRation(String text, Long fromUser, LocalDate date); // добавить рацион
+    void addPhoto(byte[] data, Long fromUser, LocalDate date);
 
-    void addHealth(String text, Long fromUser, LocalDate date); //добавить состояние здоровья
+    void addRation(String text, Long fromUser, LocalDate date);
 
-    void addBehavior(String text, Long fromUser, LocalDate date); // добавить поведение
+    void addHealth(String text, Long fromUser, LocalDate date);
 
-    Report findReportById(long reportId); // найти доклад по идентификатору
+    void addBehavior(String text, Long fromUser, LocalDate date);
 
-    List<Report> findAllReports(); // вывести все отчеты
+    Report findReportById(long reportId);
 
-    List<Report> findReportsWithStatus(ReportStatus status); //получить все отчеты по определённому статусу
+    List<Report> findAllReports();
 
-    List<Report> findWrongReports(); //получить все некорректные отчеты
+    List<Report> findReportsWithStatus(ReportStatus status);
 
-    byte[] getReportPhoto(Long reportId); //Поулчить фото по идентификатору отчета
+    List<Report> findWrongReports();
 
-    void sendMessageToUser(Long userId, String message); // Отправить сообщение пользователю
+    byte[] getReportPhoto(Long reportId);
 
-    boolean isReportingAllowed(Long telegramId); // разрашено писать сообщение или нет
+    void sendMessageToUser(Long userId, String message);
 
-    List<Report> findAllReportsByParentId(ReportStatus status, long parentId); // поулчить все отчеты от одного усыновителя
+    boolean isReportingAllowed(Long telegramId);
 
-    Report setReportStatus(long reportId, ReportStatus status); //изменить или установить статус отчету
-                                                                //из допустимых значений в перечислении ReportStatus
+    List<Report> findAllReportsByParentId(ReportStatus status, long parentId);
+
+    Report setReportStatus(long reportId, ReportStatus status);
 }

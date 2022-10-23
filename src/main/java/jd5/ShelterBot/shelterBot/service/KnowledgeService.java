@@ -1,23 +1,25 @@
 package jd5.ShelterBot.shelterBot.service;
 
+
 import jd5.ShelterBot.shelterBot.model.Knowledge;
 
 import java.util.Collection;
 
 public interface KnowledgeService {
-    Knowledge addKnowledge(Knowledge newKnowledge); // метод создания нового з
+    Knowledge addKnowledge(Knowledge newKnowledge);
 
-    Knowledge findKnowledgeById(Long id); //получить информацию по идентификатору
+    Knowledge findKnowledgeById(Long id);
 
-    String findAnswerByQuestion(String question); // получить/найти ответ на вопрос
+    String findAnswerByQuestion(String question);
 
-    String findAnswerByCodeId(String codeId); // найти вопрос по идентификаицонному коду
+    String findAnswerByCodeId(String codeId);
 
-    Knowledge updateKnowledgeById(Long id); //обновить информацию
+    Knowledge updateKnowledgeById(Long id);
 
-    void deleteKnowledgeById(Long id); //удалить информацию
+    void deleteKnowledgeById(Long id);
 
-    Collection<Knowledge> findAllKnowledge(); //получить всю информацию/всезнания
+    Collection<Knowledge> findAllKnowledge();
 
-    Collection<String> findAllAnswersToAllQuestions(); //вывести ответы на все вопросы
+    Collection<String> findAllAnswersToAllQuestions();
+
 }

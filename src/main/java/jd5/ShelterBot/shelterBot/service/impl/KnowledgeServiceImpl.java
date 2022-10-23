@@ -1,11 +1,12 @@
 package jd5.ShelterBot.shelterBot.service.impl;
 
+
 import jd5.ShelterBot.shelterBot.model.Knowledge;
+import jd5.ShelterBot.shelterBot.repository.KnowledgeRepository;
 import jd5.ShelterBot.shelterBot.service.KnowledgeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import jd5.ShelterBot.shelterBot.repository.KnowledgeRepository;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,26 +24,17 @@ public class KnowledgeServiceImpl implements KnowledgeService {
 
 
     @Override
+
     public Knowledge addKnowledge(Knowledge newKnowledge) {
-        logger.info("Запущен метод добавления/создания новой информации");
+        logger.info("Was invoked method for creating new knowledge");
         return knowledgeRepository.save(newKnowledge);
     }
 
-    /**
-     * Метод поиска информации по идентификатору
-     * @param id
-     * @return
-     */
     @Override
     public Knowledge findKnowledgeById(Long id) {
         return knowledgeRepository.findById(id).get();
     }
 
-    /**
-     * получить ответ на вопрос
-     * @param questionToFind
-     * @return
-     */
     @Override
     public String findAnswerByQuestion(String questionToFind) {
         String foundAnswer = knowledgeRepository.findKnowledgeByQuestionContainingIgnoreCase(questionToFind).getAnswer();
@@ -55,20 +47,11 @@ public class KnowledgeServiceImpl implements KnowledgeService {
         return foundAnswer;
     }
 
-    /**
-     * Обновить информацию
-     * @param id
-     * @return
-     */
     @Override
     public Knowledge updateKnowledgeById(Long id) {
         return knowledgeRepository.findById(id).get();
     }
 
-    /**
-     * Удалить информацию
-     * @param id
-     */
     @Override
     public void deleteKnowledgeById(Long id) {
         knowledgeRepository.deleteById(id);
@@ -94,8 +77,9 @@ public class KnowledgeServiceImpl implements KnowledgeService {
     }
 
     private String printString(String question, String answer) {
-        return "Вопрос:" + question +
+        return  "Вопрос:" + question +
                 "Ответ:" + answer + '\'';
 
     }
+
 }
