@@ -14,18 +14,18 @@ public class CatMap extends HashMap<String, ResponseMessage> {
         // Basic
         put(MessageConstants.USER_CONTACTS, ResponseMessage.TAKE_CONTACT);
 
-        // In main menu
+        // Главное меню
         put(MessageConstants.SHELTER_INFO, ResponseMessage.CAT_SHELTER_INFO_MESSAGE);
         put(MessageConstants.HOW_TO_ADOPT, ResponseMessage.CAT_HOW_TO_ADOPT_MESSAGE);
         put(MessageConstants.SEND_REPORT, ResponseMessage.SEND_REPORT_MESSAGE);
 
-        // In Shelter info
+        // Информация о приюте
         put(MessageConstants.SHELTER_DESCRIPTION, ResponseMessage.CAT_SHELTER_DESCRIPTION);
         put(MessageConstants.SHELTER_ADDRESS, ResponseMessage.CAT_SHELTER_ADDRESS);
         put(MessageConstants.SHELTER_SUCURITY_CONTACTS, ResponseMessage.CAT_SHELTER_CONTACTS);
         put(MessageConstants.SHELTER_RECOMMENDS, ResponseMessage.CAT_SHELTER_RECOMMENDS);
 
-        // How to adopt a cat
+        // Как взять кошку
 
         put(MessageConstants.HOW_TO_DATING_RULES, ResponseMessage.CAT_HOW_TO_DATING_RULES);
         put(MessageConstants.HOW_TO_DOCUMENTS, ResponseMessage.CAT_HOW_TO_DOCUMENTS);

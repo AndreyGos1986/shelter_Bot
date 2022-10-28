@@ -8,30 +8,29 @@ import java.util.List;
 
 public interface UserService {
 
-    ParentUser findParentByUserId(long id);
+    ParentUser findParentByUserId(long id); //найти усыновителя по идентификатору
 
-    ShelterUser findUserByTelegramId(long id);
+    ShelterUser findUserByTelegramId(long id); // найти пользователя по идентификатору телеграмм
 
-    List<ShelterUser> findAllByType(ShelterType type);
+    List<ShelterUser> findAllByType(ShelterType type); //вывести всех пользователей одного типа
 
-    ShelterUser findUserById(long id);
+    ShelterUser findUserById(long id); // найти пользователя по идентификатору
 
-    /**
-     * @param user регистрация пользователя в системе телеграм бота
-     * @return возврат сохраненного в базе данных юзера
-     */
-    ShelterUser saveUser(ShelterUser user);
 
-    ParentUser saveParent(ParentUser parent);
+    ShelterUser saveUser(ShelterUser user); // сохранить нового пользователя
 
-    ParentUser registerAsParent(long userId, String phoneNumber);
+    ParentUser saveParent(ParentUser parent); //сохранить усыновителя
 
-    List<ParentUser> findAllParents();
+    ParentUser registerAsParent(long userId, String phoneNumber); // регистрация пользователя в качестве
+    //усыновителя
 
-    long findTelegramIdByParent(ParentUser parent);
+    List<ParentUser> findAllParents(); // вывести всех усыновителей
 
-    ParentUser findParentById(long parentId);
+    long findTelegramIdByParent(ParentUser parent); //получить телеграмм-идентификатор усыновителя
 
-    ParentUser findParentByTelegramId(long telegramId);
+    ParentUser findParentById(long parentId);  // получить усыновителя по его идентификационному номеру
+
+    ParentUser findParentByTelegramId(long telegramId); //получить усыновителя по телеграмм-идентификатору усыновителя
 
 }
+

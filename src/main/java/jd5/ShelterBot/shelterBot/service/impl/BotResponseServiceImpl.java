@@ -17,7 +17,12 @@ public class BotResponseServiceImpl implements BotResponseService {
     public BotResponseServiceImpl(BotResponseRepository shelterRepository) {
         this.shelterRepository = shelterRepository;
     }
-
+    /**
+     * Метод поиска ответа на вопрос, принимающий в параметры
+     * @param message строку с вопросом, после чего осуществляется проверка и если ответ не найден,
+     *                возвращается null, если найден
+     * @return возвращается ответ
+     */
    public String getResponseMessage(String message) {
         logger.info("Trying to get response by key \"" + message + "\"");
 
@@ -31,6 +36,12 @@ public class BotResponseServiceImpl implements BotResponseService {
         return response.getResponseMessage();
     }
 
+    /**
+     * Метод добавления нового ответа, принимающий в параметры
+     * @param keyMessage ключ-запрос и
+     * @param responseMessage ответ
+     * @return после чего возвращает результат, что ключ-ответ сохранены в указанном в методе репозитории
+     */
     public BotResponse saveResponseMessage(String keyMessage, String responseMessage) {
         logger.info("Save key " + keyMessage + " with response " + responseMessage);
 

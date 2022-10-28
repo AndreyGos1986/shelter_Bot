@@ -10,14 +10,14 @@ import java.util.List;
 public interface VolunteerCallingService {
 
 
-    List<VolunteerCalling> findAllCalls();
+    List<VolunteerCalling> findAllCalls(); // получить список всех вызовов
 
-    List<VolunteerCalling> findNewCalls();
+    List<VolunteerCalling> findNewCalls(); // найти новые вызовы
 
-    List<VolunteerCalling> findNewCalls(ShelterType type);
+    List<VolunteerCalling> findNewCalls(ShelterType type); //найти новые вызовы по определённому типу пользователя
 
-    VolunteerCalling saveCall(ParentUser parent);
+    VolunteerCalling saveCall(ParentUser parent);// добавить новый вызов
 
-    VolunteerCalling saveCall(UserMessage userMessage);
+    VolunteerCalling saveCall(UserMessage userMessage); // добавить новый вызов с сообщением
 
 }

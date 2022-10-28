@@ -1,6 +1,12 @@
 package jd5.ShelterBot.shelterBot.controller;
 
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jd5.ShelterBot.shelterBot.UserNotFoundException;
 import jd5.ShelterBot.shelterBot.handler.UserMessage;
 import jd5.ShelterBot.shelterBot.model.*;
@@ -30,7 +36,7 @@ public class VolunteerController {
         this.userService = userService;
         this.volunteerCallingService = volunteerCallingService;
     }
-
+    @Operation(summary = "Поиск усыновителя по идентификатору")
     @GetMapping("findParentById")
     public ResponseEntity<ParentUser> findParentById(long parentId) {
         ParentUser user = userService.findParentById(parentId);
@@ -39,12 +45,21 @@ public class VolunteerController {
         }
         return ResponseEntity.ok(user);
     }
-
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Получить всех пользователей по одному типу",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            array = @ArraySchema(schema = @Schema(implementation = ShelterUser.class))
+                    )
+            ),
+    })
     @GetMapping("findAllByType")
     public ResponseEntity<List<ShelterUser>> findAllByType(ShelterType type) {
         return ResponseEntity.ok(userService.findAllByType(type));
     }
-
+    @Operation(summary = "Регистрация нового усыновителя")
     @GetMapping("registerUserAsParent")
      public ResponseEntity<ParentUser> registerUserAsParent(long userId, String phoneNumber) {
         ParentUser user = userService.findParentByUserId(userId);
@@ -65,35 +80,80 @@ public class VolunteerController {
         ResponseMessage.MAIN_MENU_MESSAGE.send(message);
         return ResponseEntity.ok(user);
     }
-
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Вывести всех усыновителей",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            array = @ArraySchema(schema = @Schema(implementation = ParentUser.class))
+                    )
+            ),
+    })
     @GetMapping("findAllParents")
     public ResponseEntity<List<ParentUser>> findAllUsers() {
         List<ParentUser> list = userService.findAllParents();
         return ResponseEntity.ok(list);
     }
-
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Получить всех пользователей по одному типу",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            array = @ArraySchema(schema = @Schema(implementation = VolunteerCalling.class))
+                    )
+            ),
+    })
     @GetMapping("findAllNewCalls")
     public ResponseEntity<List<VolunteerCalling>> findAllNewCalls(ShelterType type) {
         List<VolunteerCalling> list = volunteerCallingService.findNewCalls(type);
         return ResponseEntity.ok(list);
     }
-
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Получить список отчетов по определённому статусу ",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            array = @ArraySchema(schema = @Schema(implementation = Report.class))
+                    )
+            ),
+    })
     @GetMapping("findReports")
     public ResponseEntity<List<Report>> findReports(ReportStatus status) {
         List<Report> list = reportService.findReportsWithStatus(status);
         return ResponseEntity.ok(list);
     }
-
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Получить список отчетов по определённому усыновителю ",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            array = @ArraySchema(schema = @Schema(implementation = Report.class))
+                    )
+            ),
+    })
     @GetMapping("findAllReportsByParentId")
     public ResponseEntity<List<Report>> findAllReportsByParentId(ReportStatus status, long parentId) {
         return ResponseEntity.ok(reportService.findAllReportsByParentId(status, parentId));
     }
-
+    /**
+     * Метод присвоения статуса отчету, принимающий в парметры
+     * @param reportId идентификатор отчета, которому необходимо изменить статус и
+     * @param status статус, коротый будет присвоен найденному отчёту
+     * @return результат о присвоении статуса
+     */
     @GetMapping("setReportStatus")
     public ResponseEntity<Report> setReportStatus(long reportId, ReportStatus status) {
         return ResponseEntity.ok(reportService.setReportStatus(reportId, status));
     }
-
+    /**
+     * Метод получения фото из отчёта, принимающий в качестве параметра
+     * @param reportId идентификатор отчёта. Если отчёт не найден, возвращается результат ResponseEntity.notFound().build(), если найден
+     * @return возвращается ResponseEntity.ok().headers(headers).body(data)
+     */
     @GetMapping("getReportPhoto")
     public ResponseEntity<byte[]> getReportPhoto(Long reportId) {
         byte[] data = reportService.getReportPhoto(reportId);
@@ -106,7 +166,12 @@ public class VolunteerController {
         headers.setContentLength(data.length);
         return ResponseEntity.ok().headers(headers).body(data);
     }
-
+    /**
+     * Метод для отправки сообщения пользователю,принимающий в параметрах:
+     * @param userId идентификатор пользователя, которому надо отправить сообщение и
+     * @param message само сообщение, если пользователь найден
+     * @return возвращается результат, что сообщение отправлено
+     */
     @GetMapping("sendMessageToUser")
     public ResponseEntity<String> sendMessageToUser(Long userId, String message) {
         try {

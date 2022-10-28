@@ -1,6 +1,7 @@
 package jd5.ShelterBot.shelterBot.controller;
 
 
+import io.swagger.v3.oas.annotations.Operation;
 import jd5.ShelterBot.shelterBot.model.BotResponse;
 import jd5.ShelterBot.shelterBot.service.BotResponseService;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +19,13 @@ public class ShelterController {
     public ShelterController(BotResponseService shelterService) {
         this.shelterService = shelterService;
     }
-
+@Operation (summary = "Приветствие")
     @GetMapping("test")
     public ResponseEntity<String> welcome() {
         return ResponseEntity.ok("Welcome");
     }
 
+    @Operation (summary = "Получить ответное сообщение")
     @GetMapping("test/bot_response")
     public ResponseEntity<String> getResponseMessage(String message) {
         String response = shelterService.getResponseMessage(message);
@@ -32,6 +34,7 @@ public class ShelterController {
         }
         return ResponseEntity.ok(response);
     }
+
 
     @PostMapping("test/bot_response")
     public ResponseEntity<BotResponse> getResponseMessage(String keyMessage, String responseMessage) {

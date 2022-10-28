@@ -13,7 +13,10 @@ public class BotConfiguration {
     @Value("${telegram.bot.token}")
     private String token;
 
-    // Бин создания нового экземпляра бота
+    /**
+     * Бин создания нового экземпляра бота
+     * @return экземпляр бота
+     */
     @Bean
     public TelegramBot telegramBot() {
         TelegramBot bot = new TelegramBot(token);

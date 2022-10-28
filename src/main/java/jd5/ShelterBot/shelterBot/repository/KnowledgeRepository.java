@@ -5,6 +5,9 @@ import jd5.ShelterBot.shelterBot.model.Knowledge;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Репозиторий, в котором хранится информация/ответы
+ */
 @Repository
 public interface KnowledgeRepository extends JpaRepository<Knowledge,Long> {
     Knowledge findKnowledgeByQuestionContainingIgnoreCase(String question);

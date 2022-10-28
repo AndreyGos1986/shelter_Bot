@@ -14,27 +14,27 @@ import org.slf4j.LoggerFactory;
  * Класс, который хранит в себе все используемые ботом ответы
  */
 public enum ResponseMessage {
-	// New user messages
+	// Сообщения от нового пользователя
 		WELCOME_MESSAGE(new WelcomeMessage().setMenu(ResponseMenu.EMPTY.getKeyboard())),
 		NEWUSER_MESSAGE(new RepositoryResponseMessage(MessageConstants.NEWUSER_UNKNOWN_MESSAGE).setMenu(ResponseMenu.NEWUSER.getKeyboard())),
 		CAT_SHELTER_CHOSEN(new ChosenMessage(ShelterType.CAT_SHELTER).setMenu(ResponseMenu.MAIN.getKeyboard())),
 		DOG_SHELTER_CHOSEN(new ChosenMessage(ShelterType.DOG_SHELTER).setMenu(ResponseMenu.MAIN.getKeyboard())),
 
-	// Basic messages
+	// Базовые сообщения
 		MAIN_MENU_MESSAGE(new MainMenuMessage()),
 		UNKNOWN_MESSAGE(new RepositoryResponseMessage(MessageConstants.UNKNOWN_MESSAGE)),
 		INTERNAL_ERROR_MESSAGE(new InternalErrorMessage()),
 		SEND_REPORT_MESSAGE(new ReportMessage()),
 		TAKE_CONTACT(new TakeContactMessage()),
 
-	// Report messages
+	// Отчет
 		PHOTO_REPORTMESSAGE(new PhotoReportMessage()),
 		RATION_REPORTMESSAGE(new RationReportMessage()),
 		HEALTH_REPORTMESSAGE(new HealthReportMessage()),
 		BEHAVIOR_REPORTMESSAGE(new BehaviorReportMessage()),
 		COMPLETE_REPORTMESSAGE(new RepositoryResponseMessage("/отчет_завершён").setMenu(ResponseMenu.PARENT_MAIN.getKeyboard())),
 
-	// Cat shelter messages
+	// Сообщения кошачьего приюта
 	CAT_SHELTER_INFO_MESSAGE(new RepositoryResponseMessage("/cat_shelter_info").setMenu(ResponseMenu.CAT_SHELTER_INFO.getKeyboard())),
 	CAT_SHELTER_DESCRIPTION(new RepositoryResponseMessage("/cat_shelter_description")),
 	CAT_SHELTER_ADDRESS(new RepositoryResponseMessage("/cat_shelter_address")),
@@ -51,7 +51,7 @@ public enum ResponseMessage {
 	CAT_HOW_TO_IMPOVEMENT_HANDICAPPED(new RepositoryResponseMessage("/how_to_adopt_cat_handicapped")),
 	CAT_HOW_TO_REFUSAL(new RepositoryResponseMessage("/how_to_adopt_cat_refusal")),
 
-	// Dog shelter messages
+	// Сообщения собачьего приюта
 	DOG_SHELTER_INFO_MESSAGE(new RepositoryResponseMessage("/dog_shelter_info").setMenu(ResponseMenu.DOG_SHELTER_INFO.getKeyboard())),
 	DOG_SHELTER_DESCRIPTION(new RepositoryResponseMessage("/dog_shelter_description")),
 	DOG_SHELTER_ADDRESS(new RepositoryResponseMessage("/dog_shelter_address")),

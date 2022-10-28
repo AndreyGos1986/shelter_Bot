@@ -23,16 +23,30 @@ public class VolunteerCallingServiceImpl implements VolunteerCallingService {
         this.userService = userService;
     }
 
+    /**
+     *  Метод вывода всех вызовов волонтёра, осуществлящий поиск всех вызовов через метод репозитория и
+     * @return возвращающий список всех вызовов
+     */
     @Override
     public List<VolunteerCalling> findAllCalls() {
         return volunteerCallingRepository.findAll();
     }
-
+    /**
+     *  Метод вывода всех новых вызовов волонтёра, осуществлящий поиск всех новых вызовов через метод репозитория и
+     * @return возвращающий список всех новых вызовов
+     */
     @Override
     public List<VolunteerCalling> findNewCalls() {
         return volunteerCallingRepository.findAllByStatusEquals(ReportStatus.NEW);
     }
 
+    /**
+     *  Метод поиска новых вызовой по типу пользователя, принимающий в параметры
+     * @param type тип пользователя, после его осуществляется поиск всех новых вызовов через метод репозитория
+     *             далее осуществляется исключение из списка тех вызовов, которые не соответствуют указанному типу,
+     *             после чего
+     * @return возвращается список новых вызовов по указанному типу пользователя
+     */
     @Override
     public List<VolunteerCalling> findNewCalls(ShelterType type) {
         List<VolunteerCalling> list = volunteerCallingRepository.findAllByStatusEquals(ReportStatus.NEW);
@@ -40,6 +54,12 @@ public class VolunteerCallingServiceImpl implements VolunteerCallingService {
         return list;
     }
 
+    /**
+     * Метод добавления вызова, принимающий в параметры
+     * @param parent усыновителя, после чего осуществляется поиск по идентификатору,
+     *              создаётся экземляр вызова с указанными в методе присваиваниями, после чего
+     * @return в репозитории сохраняется вызов
+     */
     @Override
     public VolunteerCalling saveCall(ParentUser parent) {
         ShelterUser user = userService.findUserById(parent.getShelterUserId());
@@ -57,6 +77,22 @@ public class VolunteerCallingServiceImpl implements VolunteerCallingService {
         return volunteerCallingRepository.save(call);
     }
 
+    /**
+     * Метод добавления вызова, принимающий в параметры
+     * @param userMessage сообщение от пользователя, если у сообщения нет контакных данных, возвращается null
+     *                    либо из сообщения извлекаются контактные данные,
+     *                    создаётся экземляр вызова волонтёра,
+     *                    создаётся экземпляр класса пользователя через сервисный метод поиска по идентификатору.
+     *                    Если пользователь  - null, он становится новым экземляром класса пользователя,
+     *                    которму присваивается идентификатор, тип пользователься из перечисления.
+     *                    Далее вызову присваются дата, тип пользователя и иные указанные параметры
+     *                    После всего создаётся экземпляр усыновителя, который инициализируется через сервисный метод
+     *                    поиска усыновителя по идентификатору. Если усыновитель найден, его идентификатор присваивается
+     *                    вызове через метод присваивания, далее присваивается причина вызова и
+     *
+     *
+     * @return через метод репозитория сохраняется вызов волонтёра через сообщения от пользователя
+     */
     @Override
     public VolunteerCalling saveCall(UserMessage userMessage) {
         if(userMessage.getContact() == null) {
@@ -81,7 +117,7 @@ public class VolunteerCallingServiceImpl implements VolunteerCallingService {
         if(parent != null) {
             call.setParentId(parent.getId());
         }
-        call.setCause("Инициатива пользователя");
+        call.setCause("Сообщение от пользователя");
 
         return volunteerCallingRepository.save(call);
     }

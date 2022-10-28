@@ -14,7 +14,6 @@ import jd5.ShelterBot.shelterBot.service.UserService;
 import jd5.ShelterBot.shelterBot.service.VolunteerCallingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -31,18 +30,27 @@ public class BotUpdatesListener implements UpdatesListener {
     private final Logger logger = LoggerFactory.getLogger(BotUpdatesListener.class);
 
     // Инжект экземляра бота, созданного в BotConfiguration
-    @Autowired
-    private TelegramBot telegramBot;
+//    @Autowired
+//    private TelegramBot telegramBot;
+    private final TelegramBot telegramBot;
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private VolunteerCallingService volunteerCallingService;
-
+//    @Autowired
+//    private UserService userService;
+    private final UserService userService;
+//    @Autowired
+//    private VolunteerCallingService volunteerCallingService;
+    private final VolunteerCallingService volunteerCallingService;
     // Обработчик сообщений
-    @Autowired
-    private MessageHandler handler;
+//    @Autowired
+//    private MessageHandler handler;
+    private final MessageHandler handler;
+
+    public BotUpdatesListener(TelegramBot telegramBot, UserService userService, VolunteerCallingService volunteerCallingService, MessageHandler handler) {
+        this.telegramBot = telegramBot;
+        this.userService = userService;
+        this.volunteerCallingService = volunteerCallingService;
+        this.handler = handler;
+    }
 
     // Настройка в качестве листинера (обработчика сообщений) объект данного класса
     @PostConstruct
@@ -117,7 +125,10 @@ public class BotUpdatesListener implements UpdatesListener {
 
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
     }
-    @Scheduled(cron = "0 0/1 * * * *") //minute
+    /**
+     * Уведомление о необходимости предоставления отчета в 20.00 в течение 30 дней каждый день недели
+     */
+    @Scheduled(cron = "0 20 1/30 * 1-7 *")
     public void run() {
         List<ParentUser> list = userService.findAllParents();
         for(ParentUser parent : list) {
