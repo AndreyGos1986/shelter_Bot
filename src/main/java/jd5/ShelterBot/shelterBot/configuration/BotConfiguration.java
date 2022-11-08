@@ -7,15 +7,21 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class TelegramBotConfiguration {
+public class BotConfiguration {
 
+    // Токен бота
     @Value("${telegram.bot.token}")
     private String token;
 
+    /**
+     * Бин создания нового экземпляра бота
+     * @return экземпляр бота
+     */
     @Bean
     public TelegramBot telegramBot() {
         TelegramBot bot = new TelegramBot(token);
         bot.execute(new DeleteMyCommands());
         return bot;
     }
+
 }

@@ -11,8 +11,8 @@ public class BotResponse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // идентификатор
-    private String keyMessage; // вопрос/команда боту
-    private String responseMessage; // ответ/действие, исполняемые ботом на вопрос keyMessage
+    private String keyMessage; // вопрос или команда боту
+    private String responseMessage; // ответ, который отправляет бот пользователю на вопрос keyMessage
 
     public BotResponse() {
     }

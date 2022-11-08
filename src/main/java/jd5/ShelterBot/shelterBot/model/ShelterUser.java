@@ -1,103 +1,71 @@
 package jd5.ShelterBot.shelterBot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.pengrad.telegrambot.model.Contact;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.Objects;
-
-//Я бы оставил тут только id, telegramId и указание на id в таблице усыновителя, можно еще вытащить никнеймпользователя  в телеге.
-//Имя и фамилию из чата не вытащить насколько я знаю
-//Пока не добавляю создание таблиц для них, надо сначала понять как они будут выглядеть в итоге
-
 
 @Entity
 public class ShelterUser {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+	@Id
+	@GeneratedValue
+	private Long id;
 
-    private Long telegramId;
-    private String name;
-    private String surname;
-    private UserType userType;
-    private ShelterType shelterType;
+	@JsonIgnore
+	private long telegramId;
+	private String firstName;
+	private String lastName;
+	private ShelterType type;
 
-    public ShelterUser(Long id,
-                       Long telegramId,
-                       String name,
-                       String surname,
-                       UserType userType,
-                       ShelterType shelterType) {
-        this.id = id;
-        this.telegramId = telegramId;
-        this.name = name;
-        this.surname = surname;
-        this.userType = userType;
-        this.shelterType = shelterType;
-    }
+	public ShelterUser( Long id,ShelterType type) {
+		this.id = id;
+		this.type = type;
+	}
 
-    public ShelterUser() {
-    }
+	public ShelterUser() {
+	}
 
-    public UserType getUserType() {
-        return userType;
-    }
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public long getTelegramId() {
+		return telegramId;
+	}
+	
+	public void setTelegramId(long userId) {
+		this.telegramId = userId;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
+	
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	public ShelterType getType() {
+		return type;
+	}
+	
+	public void setType(ShelterType type) {
+		this.type = type;
+	}
 
-    public void setUserType(UserType userType) {
-        this.userType = userType;
-    }
-
-    public ShelterType getShelterType() {
-        return shelterType;
-    }
-
-    public void setShelterType(ShelterType shelterType) {
-        this.shelterType = shelterType;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getTelegramId() {
-        return telegramId;
-    }
-
-    public void setTelegramId(Long telegramId) {
-        this.telegramId = telegramId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ShelterUser that = (ShelterUser) o;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

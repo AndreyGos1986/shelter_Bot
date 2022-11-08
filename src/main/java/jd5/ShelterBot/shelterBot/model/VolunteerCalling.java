@@ -5,46 +5,44 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDate;
 
-/**
- * Класс вызова волонтёра
- */
 @Entity
 public class VolunteerCalling {
+
     @Id
     @GeneratedValue
-    private Long id; //идентификатор
+    private Long id;
     private String firstName;
     private String lastName;
-    private String phoneNumber; //телефон вызывающего
-    private Long parentId; //идентификатор усыновителя
-    private Long userId; //идентификатор пользователя (общего)
-    private String cause; //причина вызова
-    private ReportStatus status = ReportStatus.NEW; //статус
-    private UserType type; // тип вызывающего (новый пользователь, усыновитель)
-    private ShelterType shelterType; //вызывающий по типу животного (кошки, собаки, грузыну, попугаи)
-    private LocalDate date; // дата вызова
+    private String phoneNumber;
+    private Long parentId;
+    private Long userId;
+    private String cause;
+    private ReportStatus status = ReportStatus.NEW;
+    private ShelterType type;
+    private LocalDate date;
+
+    public VolunteerCalling(Long id, ReportStatus status, ShelterType type) {
+        this.id = id;
+        this.status = status;
+        this.type = type;
+    }
+
+    public VolunteerCalling() {
+    }
 
     public Long getUserId() {
         return userId;
-    }
-
-    public ShelterType getShelterType() {
-        return shelterType;
-    }
-
-    public void setShelterType(ShelterType shelterType) {
-        this.shelterType = shelterType;
     }
 
     public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-    public UserType getType() {
+    public ShelterType getType() {
         return type;
     }
 
-    public void setType(UserType type) {
+    public void setType(ShelterType type) {
         this.type = type;
     }
 

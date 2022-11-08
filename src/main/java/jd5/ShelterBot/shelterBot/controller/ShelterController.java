@@ -1,68 +1,48 @@
 package jd5.ShelterBot.shelterBot.controller;
 
-import com.pengrad.telegrambot.TelegramBot;
-import com.pengrad.telegrambot.UpdatesListener;
-import com.pengrad.telegrambot.model.Update;
-import com.pengrad.telegrambot.request.SendMessage;
-import com.pengrad.telegrambot.response.SendResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
 
-import javax.annotation.PostConstruct;
-import java.util.List;
+import io.swagger.v3.oas.annotations.Operation;
+import jd5.ShelterBot.shelterBot.model.BotResponse;
+import jd5.ShelterBot.shelterBot.service.BotResponseService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-public class ShelterController implements UpdatesListener {
+@RestController
+@RequestMapping("BotResponse")
+public class ShelterController {
 
-    private final Logger logger = LoggerFactory.getLogger(ShelterController.class);
-    private final TelegramBot telegramBot;
+    private final BotResponseService shelterService;
 
-    public ShelterController(TelegramBot telegramBot) {
-        this.telegramBot = telegramBot;
+    public ShelterController(BotResponseService shelterService) {
+        this.shelterService = shelterService;
+    }
+@Operation (summary = "Приветствие")
+    @GetMapping("test")
+    public ResponseEntity<String> welcome() {
+        return ResponseEntity.ok("Welcome");
     }
 
-    @PostConstruct
-    public void init() {
-        telegramBot.setUpdatesListener(this);
+    @Operation (summary = "Получить ответное сообщение")
+    @GetMapping("test/bot_response")
+    public ResponseEntity<String> getResponseMessage(String message) {
+        String response = shelterService.getResponseMessage(message);
+        if(response == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(response);
     }
 
-    @Override
-    public int process(List<Update> updates) {
-        updates.forEach(update -> {
-            logger.info("Processing update: {}", update);
 
-            // Проверка пользователя по базе, если нет в базе, то:
-            greetings(update);
-
-            // Иначе проверка запроса и выдача соответствующего ответа (пока заглушка)
-            Long chatId = update.message().chat().id();
-            String message = "Сообщение-заглушка";
-            sendMessage(chatId, message);
-
-            // Получение фотографии от пользователя (не сжатое), как ее сохранить в базу надо будет подумать,
-            // сам файл лежит на сервере телеги по адресу https://api.telegram.org/file/bot<token>/<file_path>
-
-            String photo = update.message().photo()[3].fileId();
-
-
-
-        });
-        return UpdatesListener.CONFIRMED_UPDATES_ALL;
-    }
-
-    private void greetings(Update update) {
-        String username = update.message().from().username();
-        String greetings = "Привет " + username;
-
-        Long chatId = update.message().chat().id();
-
-        sendMessage(chatId, greetings);
-    }
-
-    private void sendMessage(Long chatId, String message) {
-        SendMessage greetingsMessage = new SendMessage(chatId, message);
-        SendResponse response = telegramBot.execute(greetingsMessage);
-        response.isOk();
+    @PostMapping("test/bot_response")
+    public ResponseEntity<BotResponse> getResponseMessage(String keyMessage, String responseMessage) {
+        BotResponse response = shelterService.saveResponseMessage(keyMessage, responseMessage);
+        if(response == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(response);
     }
 }
+
