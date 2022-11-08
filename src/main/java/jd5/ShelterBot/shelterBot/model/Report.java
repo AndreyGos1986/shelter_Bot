@@ -23,6 +23,17 @@ public class Report {
     private ReportStatus status = ReportStatus.NEW;
     private LocalDate date;
 
+    public Report(Long id, Long parentId, byte[] photo, String ration, String health, String behavior, ReportStatus status, LocalDate date) {
+        this.id = id;
+        this.parentId = parentId;
+        this.photo = photo;
+        this.ration = ration;
+        this.health = health;
+        this.behavior = behavior;
+        this.status = status;
+        this.date = date;
+    }
+
     public Report() {
     }
 

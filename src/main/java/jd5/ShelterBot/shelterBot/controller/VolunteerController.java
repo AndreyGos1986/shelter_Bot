@@ -37,6 +37,7 @@ public class VolunteerController {
         this.volunteerCallingService = volunteerCallingService;
     }
     @Operation(summary = "Поиск усыновителя по идентификатору")
+
     @GetMapping("findParentById")
     public ResponseEntity<ParentUser> findParentById(long parentId) {
         ParentUser user = userService.findParentById(parentId);

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Имплементация сервиса ReportService
@@ -148,7 +149,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public List<Report> findReportsWithStatus(ReportStatus status) {
         List<Report> reports = repository.findAll();
-        reports.removeIf(a -> a.getStatus() != status);
+        reports.stream().filter(report -> report.getStatus()==status).collect(Collectors.toList());
         return reports;
     }
 
@@ -175,7 +176,8 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public List<Report> findWrongReports() {
         List<Report> reports = repository.findAll();
-        reports.removeIf(a -> !isWrongReport(a));
+        reports.stream().filter(report -> !isWrongReport(report)).collect(Collectors.toList());
+       // reports.removeIf(a -> !isWrongReport(a));
         return reports;
     }
 
@@ -233,7 +235,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public List<Report> findAllReportsByParentId(ReportStatus status, long parentId) {
         List<Report> reports = repository.findAllByParentId(parentId);
-        reports.removeIf(a -> a.getStatus() != status);
+        reports.stream().filter(report -> report.getStatus()==status).collect(Collectors.toList());
         return reports;
     }
 
