@@ -15,8 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @SpringBootTest
 class ReportServiceTest {
@@ -69,13 +71,13 @@ class ReportServiceTest {
                 .isEqualTo(reportListActual);
     }
 
-    //Вылетает UnsupportedOperationException на сроку ReportServiceImpl.java:151
 
-/*  @Test
+    @Test
     void findReportsWithStatus() {
         Report reportExpected = new Report();
+        Report reportExpectedTwo = new Report();
 
-        List<Report> reportListExpected = List.of(reportExpected);
+        List<Report> reportListExpected = List.of(reportExpected, reportExpectedTwo);
 
         Mockito.when(reportRepository.findAll()).thenReturn(reportListExpected);
 
@@ -86,24 +88,36 @@ class ReportServiceTest {
                 .isEqualTo(reportListActual);
     }
 
-*/
 
     //Вылетает UnsupportedOperationException на сроку ReportServiceImpl.java:178
 
-/*  @Test
+    @Test
     void findWrongReportsIfNotWrong() {
         Report report = new Report();
+        Report report1 = new Report();
+
         byte[] photo = {1};
         String ration = "ration";
         String health = "health";
         String behavior = "behavior";
+
+        byte[] photo1 = {1};
+        String ration1 = "ration";
+        String health1 = "health";
+        String behavior1 = "behavior";
 
         report.setPhoto(photo);
         report.setRation(ration);
         report.setHealth(health);
         report.setBehavior(behavior);
 
-        List<Report> reportListExpected = List.of(report);
+        report1.setPhoto(photo1);
+        report1.setRation(ration1);
+        report1.setHealth(health1);
+        report1.setBehavior(behavior1);
+
+
+        List<Report> reportListExpected = List.of(report, report1);
 
         Mockito.when(reportRepository.findAll()).thenReturn(reportListExpected);
 
@@ -111,10 +125,13 @@ class ReportServiceTest {
 
         Assertions
                 .assertThat(reportListActual)
-                .isEmpty();
+                .isEqualTo(reportListExpected);
+
+        Assertions
+                .assertThat(reportListActual.isEmpty() == false);
 
     }
-*/
+
 
     @Test
     void getReportPhotoWhenPhotoExist() {
@@ -180,27 +197,32 @@ class ReportServiceTest {
                 .isFalse();
     }
 
-//  //Вылетает UnsupportedOperationException на сроку ReportServiceImpl.java:236
 
-/*  @Test
+            //ГОТОВ
+    @Test
     void findAllReportsByParentIdNewStatus() {
-        Report reportNew = new Report();
-        reportNew.setStatus(ReportStatus.NEW);
+        long parentId = 1L;
 
-        Report reportInProgress = new Report();
-        reportNew.setStatus(ReportStatus.IN_PROGRESS);
+        byte[] photo = {1};
+        String ration = "ration";
+        String health = "health";
+        String behavior = "behavior";
+        ReportStatus newStatus = ReportStatus.NEW;
 
-        Report reportProcessed = new Report();
-        reportNew.setStatus(ReportStatus.PROCESSED);
+        byte[] photo1 = {2};
+        String ration1 = "ration";
+        String health1 = "health";
+        String behavior1 = "behavior";
+        ReportStatus newStatus1 = ReportStatus.NEW;
 
+        Report reportNew1 = new Report(0L, parentId, photo, ration, health, behavior, newStatus, LocalDate.now());
+        Report reportNew = new Report(1L, parentId, photo1, ration1, health1, behavior1, newStatus1, LocalDate.now());
 
-        long parentId = 0L;
+        List<Report> reportListByParent = List.of(reportNew1, reportNew);
 
-        List<Report> reportList = List.of(reportNew, reportInProgress, reportProcessed);
+        Mockito.when(reportRepository.findAllByParentId(parentId)).thenReturn(reportListByParent);
 
-        Mockito.when(reportRepository.findAllByParentId(parentId)).thenReturn(reportList);
-
-        List<Report> reportListExpected = List.of(reportNew);
+        List<Report> reportListExpected = List.of(reportNew1, reportNew);
 
         List<Report> reportListActual = reportService.findAllReportsByParentId(ReportStatus.NEW, parentId);
 
@@ -209,28 +231,33 @@ class ReportServiceTest {
                 .isEqualTo(reportListActual);
 
     }
-
+//ГОТОВ
     @Test
     void findAllReportsByParentIdInProgressStatus() {
-        Report reportNew = new Report();
-        reportNew.setStatus(ReportStatus.NEW);
-
-        Report reportInProgress = new Report();
-        reportNew.setStatus(ReportStatus.IN_PROGRESS);
-
-        Report reportProcessed = new Report();
-        reportNew.setStatus(ReportStatus.PROCESSED);
-
-
         long parentId = 0L;
 
-        List<Report> reportList = List.of(reportNew, reportInProgress, reportProcessed);
+        byte[] photo = {1};
+        String ration = "ration";
+        String health = "health";
+        String behavior = "behavior";
+        ReportStatus progress = ReportStatus.IN_PROGRESS;
 
-        Mockito.when(reportRepository.findAllByParentId(parentId)).thenReturn(reportList);
+        byte[] photo1 = {2};
+        String ration1 = "ration";
+        String health1 = "health";
+        String behavior1 = "behavior";
+        ReportStatus progress1 = ReportStatus.IN_PROGRESS;
 
-        List<Report> reportListExpected = List.of(reportInProgress);
+        Report reportInProgress1 = new Report(1L, parentId, photo, ration, health, behavior, progress, LocalDate.now());
+        Report reportInProgress = new Report(0L, parentId, photo1, ration1, health1, behavior1, progress1, LocalDate.now());
 
-        List<Report> reportListActual = reportService.findAllReportsByParentId(ReportStatus.NEW, parentId);
+
+        List<Report> reportListByParent = List.of(reportInProgress,reportInProgress1);
+        Mockito.when(reportRepository.findAllByParentId(parentId)).thenReturn(reportListByParent);
+
+        List<Report> reportListExpected = List.of(reportInProgress,reportInProgress1);
+
+        List<Report> reportListActual = reportService.findAllReportsByParentId(ReportStatus.IN_PROGRESS, parentId);
 
         Assertions
                 .assertThat(reportListExpected)
@@ -240,32 +267,43 @@ class ReportServiceTest {
 
     @Test
     void findAllReportsByParentIdInProcessedStatus() {
-        Report reportNew = new Report();
-        reportNew.setStatus(ReportStatus.NEW);
+        long parentId = 1L;
 
-        Report reportInProgress = new Report();
-        reportNew.setStatus(ReportStatus.IN_PROGRESS);
+        byte[] photo = {1};
+        String ration = "ration";
+        String health = "health";
+        String behavior = "behavior";
+        ReportStatus processedStatus = ReportStatus.PROCESSED;
 
-        Report reportProcessed = new Report();
-        reportNew.setStatus(ReportStatus.PROCESSED);
+        byte[] photo1 = {2};
+        String ration1 = "ration";
+        String health1 = "health";
+        String behavior1 = "behavior";
+        ReportStatus processedStatus1 = ReportStatus.PROCESSED;
+
+        ReportStatus filterStatus = ReportStatus.PROCESSED;
+
+        Report reportProcessed= new Report(0L, parentId, photo, ration, health, behavior, processedStatus, LocalDate.now());
+        Report reportProcessed2 = new Report(1L, parentId, photo1, ration1, health1, behavior1, processedStatus1, LocalDate.now());
 
 
-        long parentId = 0L;
 
-        List<Report> reportList = List.of(reportNew, reportInProgress, reportProcessed);
+        List<Report> reportListByParent = List.of(reportProcessed,reportProcessed2);
 
-        Mockito.when(reportRepository.findAllByParentId(parentId)).thenReturn(reportList);
+        Mockito.when(reportRepository.findAllByParentId(parentId)).thenReturn(reportListByParent);
 
-        List<Report> reportListExpected = List.of(reportProcessed);
+        List<Report> reportListExpected = List.of(reportProcessed,reportProcessed2);
+//                reportListByParent.stream().
+//                filter(report -> report.getStatus()==filterStatus).collect(Collectors.toList());
 
-        List<Report> reportListActual = reportService.findAllReportsByParentId(ReportStatus.NEW, parentId);
+        List<Report> reportListActual = reportService.findAllReportsByParentId(filterStatus, parentId);
 
         Assertions
                 .assertThat(reportListExpected)
                 .isEqualTo(reportListActual);
 
     }
-*/
+
 
     @Test
     void setReportStatus() {

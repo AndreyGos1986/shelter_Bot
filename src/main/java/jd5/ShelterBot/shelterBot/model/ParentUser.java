@@ -22,6 +22,11 @@ public class ParentUser {
         probation = lastReportDate.plusDays(30);
     }
 
+    public ParentUser(Long id, Long shelterUserId) {
+        this.id = id;
+        this.shelterUserId = shelterUserId;
+    }
+
     public LocalDateTime getLastNotification() {
         return lastNotification;
     }

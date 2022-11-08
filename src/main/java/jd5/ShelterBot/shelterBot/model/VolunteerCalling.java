@@ -21,6 +21,15 @@ public class VolunteerCalling {
     private ShelterType type;
     private LocalDate date;
 
+    public VolunteerCalling(Long id, ReportStatus status, ShelterType type) {
+        this.id = id;
+        this.status = status;
+        this.type = type;
+    }
+
+    public VolunteerCalling() {
+    }
+
     public Long getUserId() {
         return userId;
     }

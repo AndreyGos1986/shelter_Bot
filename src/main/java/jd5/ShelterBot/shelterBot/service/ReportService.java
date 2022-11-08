@@ -33,6 +33,6 @@ public interface ReportService {
 
     List<Report> findAllReportsByParentId(ReportStatus status, long parentId); // поулчить все отчеты от одного усыновителя
 
-    Report setReportStatus(long reportId, ReportStatus status);//изменить или установить статус отчету
+    Report  setReportStatus(long reportId, ReportStatus status);//изменить или установить статус отчету
     //из допустимых значений в перечислении ReportStatus
 }

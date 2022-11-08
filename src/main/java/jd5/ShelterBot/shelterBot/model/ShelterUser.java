@@ -20,6 +20,11 @@ public class ShelterUser {
 	private String lastName;
 	private ShelterType type;
 
+	public ShelterUser( Long id,ShelterType type) {
+		this.id = id;
+		this.type = type;
+	}
+
 	public ShelterUser() {
 	}
 
